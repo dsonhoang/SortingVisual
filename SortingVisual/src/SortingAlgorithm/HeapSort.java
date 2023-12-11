@@ -21,11 +21,7 @@ public class HeapSort extends SortingAbstract implements SortingAlgorithm {
 
         // Build max heap
         for (int i = n / 2 - 1; i >= 0; i--) {
-            heapify(n, i);
-
-            timeExecuted = (System.nanoTime() - startTime) / 1e6;
-            sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
-//            notifyDisplay();
+            heapify(n, i, startTime);
         }
 
         // Extract elements from the heap one by one
@@ -34,11 +30,10 @@ public class HeapSort extends SortingAbstract implements SortingAlgorithm {
             swap(0, i);
 
             // Increment swapCount for each swap
-            swapCount++;
             timeExecuted = (System.nanoTime() - startTime) / 1e6;
             sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
 
-            heapify(i, 0);
+            heapify(i, 0, startTime);
             notifyDisplay();
         }
 
@@ -48,53 +43,38 @@ public class HeapSort extends SortingAbstract implements SortingAlgorithm {
         isRunning = false;
     }
 
-    private void heapify(int n, int i) {
+    private void heapify(int n, int i, double startTime) {
         int largest = i;
         int left = 2 * i + 1;
         int right = 2 * i + 2;
-
-        // Increment accessCount for accessing values[i]
-        accessCount++;
 
         if (left < n && values[left] > values[largest]) {
             largest = left;
         }
 
-        // Increment comparisons for the comparison in the if statement
-        comparisons++;
-
-        // Increment accessCount for accessing values[left]
-        accessCount++;
-
         if (right < n && values[right] > values[largest]) {
             largest = right;
         }
 
-        // Increment comparisons for the comparison in the if statement
-        comparisons++;
-
-        // Increment accessCount for accessing values[right]
-        accessCount++;
+        comparisons += 4;
+        accessCount += 4;
 
         if (largest != i) {
-            // Swap values[i] with values[largest]
             swap(i, largest);
 
-            // Increment swapCount for each swap
-            swapCount++;
-
-            heapify(n, largest);
-
-            timeExecuted = (System.nanoTime() - System.nanoTime()) / 1e6;
-            sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
-            notifyDisplay();
+            heapify(n, largest, startTime);
         }
+
+        timeExecuted = (System.nanoTime() - startTime) / 1e6;
+        sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
+        notifyDisplay();
     }
 
     private void swap(int i, int j) {
-        int temp = values[i];
+        int tmp = values[i];
         values[i] = values[j];
-        values[j] = temp;
+        values[j] = tmp;
+        swapCount++;
     }
 
     private void notifyDisplay() {
