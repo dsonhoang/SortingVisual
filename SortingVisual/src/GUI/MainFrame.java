@@ -1,5 +1,7 @@
 package GUI;
-//Testtttttttttttttt
+
+import SortingAlgorithm.TestCustomSort;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -36,6 +38,14 @@ public class MainFrame extends JFrame {
         c.gridy = 2;
         add(compareModeBtn, c);
         compareModeBtn.addActionListener(e -> {
+            dispose();
+            new CompareMode().setVisible(true);
+        });
+
+        JButton customCodeButton = createStyledButton("Your custom Mode");
+        c.gridy = 3;
+        add(customCodeButton, c);
+        customCodeButton.addActionListener(e -> {
             dispose();
             new CompareMode().setVisible(true);
         });

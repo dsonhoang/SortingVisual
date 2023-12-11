@@ -27,6 +27,7 @@ public class Helper {
         list.add("Bubble Sort");
         list.add("Insertion Sort");
         list.add("Selection Sort");
+        list.add("Custom Sort");
 
         return list;
     }
@@ -39,6 +40,8 @@ public class Helper {
                 return new InsertionSort(values);
             case "Selection Sort":
                 return new SelectionSort(values);
+            case "Custom Sort":
+                return new CustomSort(values);
             default:
                 return null;
         }

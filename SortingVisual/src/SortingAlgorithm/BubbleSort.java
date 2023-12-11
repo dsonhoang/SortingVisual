@@ -64,7 +64,7 @@ public class BubbleSort extends SortingAbstract implements SortingAlgorithm {
         if (sortingDisplay != null) {
             sortingDisplay.repaint();
             try {
-                Thread.sleep(5); // Delay for visualization
+                Thread.sleep(DELAY); // Delay for visualization
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

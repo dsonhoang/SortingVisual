@@ -6,6 +6,7 @@ public abstract class SortingAbstract {
     protected int swapCount;
     protected double timeExecuted;
     protected boolean isRunning;
+    public static final int DELAY = 5;
 
     public SortingAbstract() {
         accessCount = 0;
