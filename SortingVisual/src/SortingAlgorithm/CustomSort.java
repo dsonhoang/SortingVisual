@@ -41,7 +41,6 @@ public class CustomSort extends SortingAbstract implements SortingAlgorithm {
             notifyDisplay();
         }
 
-
         long endTime = System.nanoTime();
         timeExecuted = (endTime - startTime) / 1e6;
         sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);

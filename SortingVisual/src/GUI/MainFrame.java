@@ -39,6 +39,14 @@ public class MainFrame extends JFrame {
             new CompareMode().setVisible(true);
         });
 
+        JButton customCodeButton = createStyledButton("Your custom code");
+        c.gridy = 3;
+        add(customCodeButton, c);
+        customCodeButton.addActionListener(e -> {
+            dispose();
+            new CustomCodeFrame().setVisible(true);
+        });
+
         setVisible(true);
     }
 
