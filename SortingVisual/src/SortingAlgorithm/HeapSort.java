@@ -21,11 +21,11 @@ public class HeapSort extends SortingAbstract implements SortingAlgorithm {
 
         // Build max heap
         for (int i = n / 2 - 1; i >= 0; i--) {
-            heapify(n, i);
+            heapify(n, i, startTime);
 
             timeExecuted = (System.nanoTime() - startTime) / 1e6;
             sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
-//            notifyDisplay();
+            notifyDisplay();
         }
 
         // Extract elements from the heap one by one
@@ -38,17 +38,14 @@ public class HeapSort extends SortingAbstract implements SortingAlgorithm {
             timeExecuted = (System.nanoTime() - startTime) / 1e6;
             sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
 
-            heapify(i, 0);
+            heapify(i, 0, startTime);
             notifyDisplay();
         }
 
-        long endTime = System.nanoTime();
-        timeExecuted = (endTime - startTime) / 1e6;
-        sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
         isRunning = false;
     }
 
-    private void heapify(int n, int i) {
+    private void heapify(int n, int i, long startTime) {
         int largest = i;
         int left = 2 * i + 1;
         int right = 2 * i + 2;
@@ -83,9 +80,9 @@ public class HeapSort extends SortingAbstract implements SortingAlgorithm {
             // Increment swapCount for each swap
             swapCount++;
 
-            heapify(n, largest);
+            heapify(n, largest, startTime);
 
-            timeExecuted = (System.nanoTime() - System.nanoTime()) / 1e6;
+            timeExecuted = (System.nanoTime() - startTime) / 1e6;
             sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
             notifyDisplay();
         }
