@@ -12,7 +12,7 @@ public class Helper {
         Random random = new Random();
 
         for (int i = 0; i < size; i++) {
-            int s = random.nextInt();
+            int s = random.nextInt(1000000);
             while (s <= 0) {
                 s = random.nextInt();
             }
