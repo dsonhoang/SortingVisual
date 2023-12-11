@@ -43,7 +43,7 @@ public class HeapSort extends SortingAbstract implements SortingAlgorithm {
         isRunning = false;
     }
 
-    private void heapify(int n, int i, double startTime) {
+    private void heapify(int n, int i, long startTime) {
         int largest = i;
         int left = 2 * i + 1;
         int right = 2 * i + 2;
