@@ -20,6 +20,7 @@ class CompareMode extends JFrame {
     private String prevSelection2;
     private final int LENGTH = 280;
     private final int WIDTH = 1280;
+
     public CompareMode() {
         Helper helper = new Helper();
         setLayout(new BorderLayout());
@@ -145,9 +146,9 @@ class CompareMode extends JFrame {
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
-        JButton resetArrayButton = createStyledButton("Reset array");
-        resetArrayButton.setPreferredSize(new Dimension(100, 30));
-        resetArrayButton.addActionListener(new ActionListener() {
+        JButton changeSizeButton = createStyledButton("Change array size");
+        changeSizeButton.setPreferredSize(new Dimension(150, 30));
+        changeSizeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (firstSortingAlgorithm.isRunning() || secondSortingAlgorithm.isRunning()) {
                     return;
@@ -171,6 +172,23 @@ class CompareMode extends JFrame {
                         JOptionPane.showMessageDialog(null, "Please enter a valid integer.");
                     }
                 }
+            }
+        });
+        bottomPanel.add(changeSizeButton);
+
+        JButton resetArrayButton = createStyledButton("Reset array");
+        resetArrayButton.setPreferredSize(new Dimension(150, 30));
+        resetArrayButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (firstSortingAlgorithm.isRunning() || secondSortingAlgorithm.isRunning()) {
+                    return;
+                }
+
+                int[] newArray = new Helper().generateRandomIntArray(firstSortingAlgorithm.getValues().length);
+                firstSortingAlgorithm.setValues(newArray);
+                secondSortingAlgorithm.setValues(newArray.clone());
+                repaint();
+
             }
         });
         bottomPanel.add(resetArrayButton);

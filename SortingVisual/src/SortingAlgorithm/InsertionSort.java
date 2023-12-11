@@ -72,4 +72,9 @@ public class InsertionSort extends SortingAbstract implements SortingAlgorithm {
             }
         }
     }
+    @Override
+    public void reset() {
+        super.reset();
+        sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
+    }
 }

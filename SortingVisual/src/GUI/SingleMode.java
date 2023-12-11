@@ -89,9 +89,9 @@ public class SingleMode extends JFrame {
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
-        JButton resetArrayButton = createStyledButton("Reset array");
-        resetArrayButton.setPreferredSize(new Dimension(100, 30));
-        resetArrayButton.addActionListener(new ActionListener() {
+        JButton changeSizeButton = createStyledButton("Change array size");
+        changeSizeButton.setPreferredSize(new Dimension(150, 30));
+        changeSizeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (sortingAlgorithm.isRunning()) {
                     return;
@@ -114,6 +114,20 @@ public class SingleMode extends JFrame {
                         JOptionPane.showMessageDialog(null, "Please enter a valid integer.");
                     }
                 }
+            }
+        });
+        bottomPanel.add(changeSizeButton);
+
+        JButton resetArrayButton = createStyledButton("Reset array");
+        resetArrayButton.setPreferredSize(new Dimension(150, 30));
+        resetArrayButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (sortingAlgorithm.isRunning()) {
+                    return;
+                }
+                int[] newArray = helper.generateRandomIntArray(sortingAlgorithm.getValues().length);
+                sortingAlgorithm.setValues(newArray);
+                repaint();
             }
         });
         bottomPanel.add(resetArrayButton);

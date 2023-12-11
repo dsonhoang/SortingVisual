@@ -69,4 +69,9 @@ public class SelectionSort extends SortingAbstract implements SortingAlgorithm {
             }
         }
     }
+    @Override
+    public void reset() {
+        super.reset();
+        sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
+    }
 }

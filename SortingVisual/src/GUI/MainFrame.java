@@ -7,6 +7,7 @@ public class MainFrame extends JFrame {
 
     public MainFrame() {
         setTitle("Sorting Visualization");
+//        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1280, 720);
         setResizable(false);

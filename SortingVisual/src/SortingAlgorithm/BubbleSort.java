@@ -44,9 +44,9 @@ public class BubbleSort extends SortingAbstract implements SortingAlgorithm {
 
     @Override
     public void setValues(int[] values) {
+        reset();
         this.values = values;
         this.sortingDisplay.setValues(values);
-        reset();
     }
 
     @Override
@@ -69,5 +69,11 @@ public class BubbleSort extends SortingAbstract implements SortingAlgorithm {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
     }
 }

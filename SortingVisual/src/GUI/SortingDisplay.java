@@ -38,9 +38,9 @@ public class SortingDisplay extends JPanel {
         for (int i = 0; i < values.length; i++) {
             int barHeight = (int) ((double) values[i] / maxValue * maxHeight * 0.9);
             g.setColor(Color.BLUE);
-            g.fillRect(empty_space + i * barWidth, maxHeight - barHeight, barWidth, barHeight);
+            g.fillRect(empty_space / 2 + i * barWidth, maxHeight - barHeight, barWidth, barHeight);
             g.setColor(Color.BLACK);
-            g.drawRect(empty_space + i * barWidth, maxHeight - barHeight, barWidth, barHeight);
+            g.drawRect(empty_space / 2 + i * barWidth, maxHeight - barHeight, barWidth, barHeight);
         }
 
         // Display statistics
@@ -49,7 +49,7 @@ public class SortingDisplay extends JPanel {
         g.drawString("Access Count: " + accessCount, 10, 20);
         g.drawString("Comparisons: " + comparisons, 10, 40);
         g.drawString("Swap Count: " + swapCount, 10, 60);
-        g.drawString("Time Executed: " + timeExecuted + " ms", 10, 80);
+        g.drawString("Time Executed: " + timeExecuted / 1000.0 + " s", 10, 80);
     }
 
     private int getMaxValue() {
