@@ -151,6 +151,7 @@ public class SingleMode extends JFrame {
 
         setTitle("Single Mode");
         setSize(1280, 720);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setResizable(false);

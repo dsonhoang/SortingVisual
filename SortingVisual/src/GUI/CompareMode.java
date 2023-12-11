@@ -219,6 +219,7 @@ class CompareMode extends JFrame {
 
         setTitle("Compare Mode");
         setSize(1280, 720);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setResizable(false);
