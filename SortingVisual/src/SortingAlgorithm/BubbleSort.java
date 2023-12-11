@@ -19,12 +19,12 @@ public class BubbleSort extends SortingAbstract implements SortingAlgorithm {
 
         int n = values.length;
         for (int i = 0; i < n - 1; i++) {
-            for (int j = i + 1; j < n; j++) {
+            for (int j = 0; j < n - i - 1; j++) {
                 accessCount++;
-                if (values[i] > values[j]) {
-                    int tmp = values[i];
-                    values[i] = values[j];
-                    values[j] = tmp;
+                if (values[j] > values[j + 1]) {
+                    int temp = values[j];
+                    values[j] = values[j + 1];
+                    values[j + 1] = temp;
                     swapCount++;
                     timeExecuted = (System.nanoTime() - startTime) / 1e6;
                     sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
@@ -33,7 +33,6 @@ public class BubbleSort extends SortingAbstract implements SortingAlgorithm {
                 comparisons++;
             }
         }
-
 
         long endTime = System.nanoTime();
         timeExecuted = (endTime - startTime) / 1e6;

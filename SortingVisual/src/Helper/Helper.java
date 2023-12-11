@@ -13,7 +13,7 @@ public class Helper {
 
         for (int i = 0; i < size; i++) {
             int s = random.nextInt();
-            while(s <= 0) {
+            while (s <= 0) {
                 s = random.nextInt();
             }
             randomArray[i] = s;
@@ -25,8 +25,15 @@ public class Helper {
     public List<String> getListAlgorithm() {
         List<String> list = new ArrayList<String>();
         list.add("Bubble Sort");
+        list.add("Bucket Sort");
+        list.add("Counting Sort");
+        list.add("Heap Sort");
         list.add("Insertion Sort");
+        list.add("Merge Sort");
+        list.add("Quick Sort");
+        list.add("Radix Sort");
         list.add("Selection Sort");
+        list.add("Shell Sort");
         list.add("Custom Sort");
 
         return list;
@@ -40,6 +47,20 @@ public class Helper {
                 return new InsertionSort(values);
             case "Selection Sort":
                 return new SelectionSort(values);
+            case "Quick Sort":
+                return new QuickSort(values);
+            case "Merge Sort":
+                return new MergeSort(values);
+            case "Heap Sort":
+                return new HeapSort(values);
+            case "Bucket Sort":
+                return new BucketSort(values);
+            case "Shell Sort":
+                return new ShellSort(values);
+            case "Counting Sort":
+                return new CountingSort(values);
+            case "Radix Sort":
+                return new RadixSort(values);
             case "Custom Sort":
                 return new CustomSort(values);
             default:
