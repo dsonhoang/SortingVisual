@@ -26,7 +26,7 @@ public class SingleMode extends JFrame {
         JPanel labelCenter = new JPanel();
         labelCenter.setLayout(new FlowLayout(FlowLayout.CENTER));
         JLabel titleLabel = new JLabel("Single Mode");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        titleLabel.setFont(new Font("Segoe UI", 1, 30));
         labelCenter.add(titleLabel);
         topCenterPanel.add(labelCenter, BorderLayout.NORTH);
 
@@ -44,7 +44,7 @@ public class SingleMode extends JFrame {
         hbox.add(backButton);
 
         sortAlgorithmCombo = new JComboBox<>(helper.getListAlgorithm().toArray(new String[0]));
-        sortAlgorithmCombo.setFont(new Font("Arial", Font.PLAIN, 12));
+        sortAlgorithmCombo.setFont(new Font("Segoe UI", 1, 12));
         sortAlgorithmCombo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -159,7 +159,7 @@ public class SingleMode extends JFrame {
 
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
-        button.setFont(new Font("Arial", Font.PLAIN, 12));
+        button.setFont(new Font("Segoe UI", 1, 12));
         button.setBackground(new Color(70, 130, 180));
         button.setForeground(Color.BLACK);
         button.setFocusPainted(false);

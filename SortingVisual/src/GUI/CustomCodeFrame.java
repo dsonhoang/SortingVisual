@@ -11,37 +11,54 @@ import java.nio.file.Path;
 public class CustomCodeFrame extends JFrame {
     private JTextArea editableArea;
     private JButton saveButton;
+    private JButton backButton;
 
     public CustomCodeFrame() {
         setTitle("Custom Code Frame");
         setSize(1280, 720);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         editableArea = new JTextArea();
         editableArea.setBackground(new Color(255, 255, 255));
-        editableArea.setFont(new Font("Arial", Font.PLAIN, 16));
+        editableArea.setFont(new Font("Segoe UI", 1, 16));
 
         JScrollPane scroller = new JScrollPane(editableArea);
         scroller.setPreferredSize(new Dimension(300, 600));
 
-        saveButton = new JButton("Save Code");
+        saveButton = createStyledButton("Save");
+        saveButton.setPreferredSize(new Dimension(60, 30));
 
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 saveCode();
+                dispose();
+                new MainFrame().setVisible(true);
+            }
+        });
+
+        backButton = createStyledButton("Back");
+        backButton.setPreferredSize(new Dimension(60, 30));
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new MainFrame().setVisible(true);
             }
         });
 
         setLayout(new BorderLayout());
         add(scroller, BorderLayout.NORTH);
-        add(saveButton, BorderLayout.SOUTH);
+        JPanel footer = new JPanel();
+        footer.add(saveButton);
+        footer.add(backButton);
+        add(footer, BorderLayout.SOUTH);
 
         loadCode();
     }
 
     private void saveCode() {
-        String filePath = "C:\\Users\\dsonh\\IdeaProjects\\SortingVisual\\src\\SortingAlgorithm\\CustomCode.java";
+        String filePath = ".\\SortingVisual\\src\\SortingAlgorithm\\CustomSort.java";
         try {
             String fileContent = Files.readString(Path.of(filePath));
             String text = editableArea.getText();
@@ -55,7 +72,7 @@ public class CustomCodeFrame extends JFrame {
     }
 
     private void loadCode() {
-        String filePath = "C:\\Users\\dsonh\\IdeaProjects\\SortingVisual\\src\\SortingAlgorithm\\CustomCode.java";
+        String filePath = ".\\SortingVisual\\src\\SortingAlgorithm\\CustomSort.java";
         try {
             String fileContent = Files.readString(Path.of(filePath));
 
@@ -84,10 +101,12 @@ public class CustomCodeFrame extends JFrame {
         return result;
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            CustomCodeFrame customCodeFrame = new CustomCodeFrame();
-            customCodeFrame.setVisible(true);
-        });
+    private JButton createStyledButton(String text) {
+        JButton button = new JButton(text);
+        button.setFont(new Font("Segoe UI", 1, 12));
+        button.setBackground(new Color(70, 130, 180));
+        button.setForeground(Color.BLACK);
+        button.setFocusPainted(false);
+        return button;
     }
 }

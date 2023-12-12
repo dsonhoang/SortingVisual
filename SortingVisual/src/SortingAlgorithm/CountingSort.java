@@ -35,6 +35,11 @@ public class CountingSort extends SortingAbstract implements SortingAlgorithm {
             if (num < min) {
                 min = num;
             }
+            accessCount++;
+            comparisons+=2;
+            timeExecuted = (System.nanoTime() - startTime) / 1e6;
+            sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
+            notifyDisplay();
         }
 
         // Create a counting array to store the count of each value
@@ -45,25 +50,28 @@ public class CountingSort extends SortingAbstract implements SortingAlgorithm {
         for (int num : arr) {
             count[num - min]++;
             accessCount++;
-            notifyDisplay(startTime);
+            timeExecuted = (System.nanoTime() - startTime) / 1e6;
+            sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
+            notifyDisplay();
         }
 
         // Update the input array with sorted values
         int index = 0;
         for (int i = 0; i < range; i++) {
+            accessCount++;
             while (count[i] > 0) {
+                comparisons++;
                 arr[index++] = i + min;
                 count[i]--;
                 swapCount++;
-                notifyDisplay(startTime);
+                timeExecuted = (System.nanoTime() - startTime) / 1e6;
+                sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
+                notifyDisplay();
             }
         }
     }
 
-    private void notifyDisplay(long startTime) {
-        timeExecuted = (System.nanoTime() - startTime) / 1e6;
-        sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
-
+    private void notifyDisplay() {
         if (sortingDisplay != null) {
             sortingDisplay.repaint();
             try {

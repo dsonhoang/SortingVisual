@@ -17,7 +17,7 @@ public class MainFrame extends JFrame {
         c.insets = new Insets(10, 10, 10, 10);
 
         JLabel choiceLabel = new JLabel("SELECT YOUR CHOICE");
-        choiceLabel.setFont(new Font("Arial", Font.BOLD, 36));
+        choiceLabel.setFont(new Font("Segoe UI", 1, 36));
         c.gridx = 0;
         c.gridy = 0;
         c.anchor = GridBagConstraints.NORTH;
@@ -39,12 +39,20 @@ public class MainFrame extends JFrame {
             new CompareMode().setVisible(true);
         });
 
+        JButton customCodeButton = createStyledButton("Your custom code");
+        c.gridy = 3;
+        add(customCodeButton, c);
+        customCodeButton.addActionListener(e -> {
+            dispose();
+            new CustomCodeFrame().setVisible(true);
+        });
+
         setVisible(true);
     }
 
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
-        button.setFont(new Font("Arial", Font.PLAIN, 18));
+        button.setFont(new Font("Segoe UI", 1, 18));
         button.setBackground(new Color(21, 68, 53));
         button.setForeground(Color.BLACK);
         button.setFocusPainted(false);
