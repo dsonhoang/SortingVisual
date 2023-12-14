@@ -48,6 +48,7 @@ class CompareMode extends JFrame {
         hbox.add(backButton);
 
         sortAlgorithmCombo1 = new JComboBox<>(helper.getListAlgorithm().toArray(new String[0]));
+        sortAlgorithmCombo1.setFont(new Font("Segoe UI", 1, 12));
         sortAlgorithmCombo1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -81,6 +82,7 @@ class CompareMode extends JFrame {
         hbox.add(sortAlgorithmCombo1);
 
         JComboBox sortAlgorithmCombo2 = new JComboBox<>(helper.getListAlgorithm().toArray(new String[0]));
+        sortAlgorithmCombo2.setFont(new Font("Segoe UI", 1, 12));
         sortAlgorithmCombo2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
