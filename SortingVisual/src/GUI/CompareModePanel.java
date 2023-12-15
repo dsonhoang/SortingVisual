@@ -1,6 +1,6 @@
 package GUI;
 
-import Helper.Helper;
+import Helper.*;
 import SortingAlgorithm.*;
 
 import javax.swing.*;

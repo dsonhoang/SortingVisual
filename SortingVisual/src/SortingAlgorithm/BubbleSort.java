@@ -2,14 +2,19 @@ package SortingAlgorithm;
 
 import GUI.SortingDisplay;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BubbleSort extends SortingAbstract implements SortingAlgorithm {
     private int[] values;
     private SortingDisplay sortingDisplay;
+    private List<Integer> swappedColumns; // New
 
     public BubbleSort(int[] values) {
         super();
         this.values = values;
         this.sortingDisplay = new SortingDisplay(values);
+        this.swappedColumns = new ArrayList<>(); // New
     }
 
     @Override
@@ -26,20 +31,25 @@ public class BubbleSort extends SortingAbstract implements SortingAlgorithm {
                     values[j] = values[j + 1];
                     values[j + 1] = temp;
                     swapCount++;
+                    swappedColumns.clear(); // Clear the previous swapped columns
+                    swappedColumns.add(j); // Add the first column being swapped
+                    swappedColumns.add(j + 1);
                     timeExecuted = (System.nanoTime() - startTime) / 1e6;
-                    sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
+                    sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, swappedColumns);
                     notifyDisplay();
                 }
                 comparisons++;
             }
         }
 
+        sortingDisplay.setSorted(true);
+        notifyDisplay();
+
         long endTime = System.nanoTime();
         timeExecuted = (endTime - startTime) / 1e6;
-        sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
+        sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, swappedColumns);
         isRunning = false;
     }
-
 
     @Override
     public void setValues(int[] values) {
@@ -73,6 +83,7 @@ public class BubbleSort extends SortingAbstract implements SortingAlgorithm {
     @Override
     public void reset() {
         super.reset();
-        sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
+        sortingDisplay.setSorted(false);
+        sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, swappedColumns);
     }
 }

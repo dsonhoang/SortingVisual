@@ -25,8 +25,6 @@ public class Helper {
     public List<String> getListAlgorithm() {
         List<String> list = new ArrayList<String>();
         list.add("Bubble Sort");
-        list.add("Bucket Sort");
-        list.add("Counting Sort");
         list.add("Heap Sort");
         list.add("Insertion Sort");
         list.add("Merge Sort");
@@ -53,12 +51,8 @@ public class Helper {
                 return new MergeSort(values);
             case "Heap Sort":
                 return new HeapSort(values);
-            case "Bucket Sort":
-                return new BucketSort(values);
             case "Shell Sort":
                 return new ShellSort(values);
-            case "Counting Sort":
-                return new CountingSort(values);
             case "Radix Sort":
                 return new RadixSort(values);
             case "Custom Sort":
