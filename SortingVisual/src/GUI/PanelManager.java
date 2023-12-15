@@ -3,21 +3,21 @@ package GUI;
 import javax.swing.*;
 import java.awt.*;
 
-public class panelManager {
-    private static panelManager instance;
+public class PanelManager {
+    private static PanelManager instance;
 
     private JPanel cardPanel;
     private CardLayout cardLayout;
 
-    private panelManager() {
+    private PanelManager() {
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
         addPanels();
     }
 
-    public static panelManager getInstance() {
+    public static PanelManager getInstance() {
         if (instance == null) {
-            instance = new panelManager();
+            instance = new PanelManager();
         }
         return instance;
     }
@@ -39,7 +39,7 @@ public class panelManager {
     }
 
     public static void showPanel(String panelName) {
-        panelManager listPanels = getInstance();
-        listPanels.cardLayout.show(listPanels.cardPanel, panelName);
+        PanelManager panelManager = getInstance();
+        panelManager.cardLayout.show(panelManager.cardPanel, panelName);
     }
 }

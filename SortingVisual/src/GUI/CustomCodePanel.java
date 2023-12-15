@@ -31,14 +31,14 @@ public class CustomCodePanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 saveCode();
                 JOptionPane.showMessageDialog(null, "Saved successfully!", "Save Notification", JOptionPane.INFORMATION_MESSAGE);
-                panelManager.showPanel("ChoicePanel");
+                PanelManager.showPanel("ChoicePanel");
             }
         });
 
 
         backButton = ElementCreater.createButton("Back", 12);
         backButton.setPreferredSize(new Dimension(60, 30));
-        backButton.addActionListener(e -> panelManager.showPanel("ChoicePanel"));
+        backButton.addActionListener(e -> PanelManager.showPanel("ChoicePanel"));
 
         JPanel footer = new JPanel();
         footer.add(saveButton);

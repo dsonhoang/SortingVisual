@@ -31,7 +31,7 @@ public class SingleModePanel extends JPanel {
 
         backButton = ElementCreater.createButton("Back", 12);
         backButton.setPreferredSize(new Dimension(60, 30));
-        backButton.addActionListener(e -> panelManager.showPanel("ChoicePanel"));
+        backButton.addActionListener(e -> PanelManager.showPanel("ChoicePanel"));
         hbox.add(backButton);
 
         sortAlgorithmCombo = new JComboBox<>(helper.getListAlgorithm().toArray(new String[0]));

@@ -3,12 +3,12 @@ package GUI;
 import javax.swing.*;
 
 public class MainDisplay extends JFrame {
-    private panelManager listPanels;
+    private PanelManager panelManager;
     public MainDisplay() {
         initializeFrame();
-        listPanels = panelManager.getInstance();
-        listPanels.showPanel("ChoicePanel");
-        add(listPanels.getCardPanel());
+        panelManager = PanelManager.getInstance();
+        panelManager.showPanel("ChoicePanel");
+        add(panelManager.getCardPanel());
 
         setVisible(true);
     }
