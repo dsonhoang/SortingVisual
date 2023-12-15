@@ -3,10 +3,10 @@ package GUI;
 import javax.swing.*;
 
 public class MainDisplay extends JFrame {
-    private ListPanels listPanels;
+    private panelManager listPanels;
     public MainDisplay() {
         initializeFrame();
-        listPanels = ListPanels.getInstance();
+        listPanels = panelManager.getInstance();
         listPanels.showPanel("ChoicePanel");
         add(listPanels.getCardPanel());
 

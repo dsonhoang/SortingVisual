@@ -23,19 +23,15 @@ public class SingleModePanel extends JPanel {
         JPanel topCenterPanel = new JPanel();
         topCenterPanel.setLayout(new BorderLayout());
 
-        JPanel labelCenter = new JPanel();
-        labelCenter.setLayout(new FlowLayout(FlowLayout.CENTER));
-        JLabel titleLabel = new JLabel("Single Mode");
-        titleLabel.setFont(new Font("Segoe UI", 1, 30));
-        labelCenter.add(titleLabel);
+        JPanel labelCenter = ElementCreater.createLabel("Single Mode");
         topCenterPanel.add(labelCenter, BorderLayout.NORTH);
 
         // Create a box for the buttons
         Box hbox = Box.createHorizontalBox();
 
-        backButton = createStyledButton("Back");
+        backButton = ElementCreater.createButton("Back", 12);
         backButton.setPreferredSize(new Dimension(60, 30));
-        backButton.addActionListener(e -> ListPanels.showPanel("ChoicePanel"));
+        backButton.addActionListener(e -> panelManager.showPanel("ChoicePanel"));
         hbox.add(backButton);
 
         sortAlgorithmCombo = new JComboBox<>(helper.getListAlgorithm().toArray(new String[0]));
@@ -84,7 +80,7 @@ public class SingleModePanel extends JPanel {
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
-        JButton changeSizeButton = createStyledButton("Change array size");
+        JButton changeSizeButton = ElementCreater.createButton("Change array size", 12);
         changeSizeButton.setPreferredSize(new Dimension(150, 30));
         changeSizeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -114,7 +110,7 @@ public class SingleModePanel extends JPanel {
         });
         bottomPanel.add(changeSizeButton);
 
-        JButton resetArrayButton = createStyledButton("Reset array");
+        JButton resetArrayButton = ElementCreater.createButton("Reset array", 12);
         resetArrayButton.setPreferredSize(new Dimension(150, 30));
         resetArrayButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -128,7 +124,7 @@ public class SingleModePanel extends JPanel {
         });
         bottomPanel.add(resetArrayButton);
 
-        JButton startButton = createStyledButton("Start");
+        JButton startButton = ElementCreater.createButton("Start", 12);
         startButton.setPreferredSize(new Dimension(60, 30));
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -144,14 +140,5 @@ public class SingleModePanel extends JPanel {
         bottomPanel.add(startButton);
 
         add(bottomPanel, BorderLayout.SOUTH);
-    }
-
-    private JButton createStyledButton(String text) {
-        JButton button = new JButton(text);
-        button.setFont(new Font("Segoe UI", 1, 12));
-        button.setBackground(new Color(70, 130, 180));
-        button.setForeground(Color.BLACK);
-        button.setFocusPainted(false);
-        return button;
     }
 }

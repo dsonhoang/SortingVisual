@@ -31,16 +31,12 @@ public class CompareModePanel extends JPanel {
         JPanel topCenterPanel = new JPanel();
         topCenterPanel.setLayout(new BorderLayout());
 
-        JPanel labelCenter = new JPanel();
-        labelCenter.setLayout(new FlowLayout(FlowLayout.CENTER));
-        JLabel titleLabel = new JLabel("Compare Mode");
-        titleLabel.setFont(new Font("Segoe UI", 1, 30));
-        labelCenter.add(titleLabel);
+        JPanel labelCenter = ElementCreater.createLabel("Compare Mode");
         topCenterPanel.add(labelCenter, BorderLayout.NORTH);
 
-        backButton = createStyledButton("Back");
+        backButton = ElementCreater.createButton("Back", 12);
         backButton.setPreferredSize(new Dimension(60, 30));
-        backButton.addActionListener(e -> ListPanels.showPanel("ChoicePanel"));
+        backButton.addActionListener(e -> panelManager.showPanel("ChoicePanel"));
         hbox.add(backButton);
 
         sortAlgorithmCombo1 = new JComboBox<>(helper.getListAlgorithm().toArray(new String[0]));
@@ -138,7 +134,7 @@ public class CompareModePanel extends JPanel {
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
-        JButton changeSizeButton = createStyledButton("Change array size");
+        JButton changeSizeButton = ElementCreater.createButton("Change array size", 12);
         changeSizeButton.setPreferredSize(new Dimension(150, 30));
         changeSizeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -168,7 +164,7 @@ public class CompareModePanel extends JPanel {
         });
         bottomPanel.add(changeSizeButton);
 
-        JButton resetArrayButton = createStyledButton("Reset array");
+        JButton resetArrayButton = ElementCreater.createButton("Reset array", 12);
         resetArrayButton.setPreferredSize(new Dimension(150, 30));
         resetArrayButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -184,7 +180,7 @@ public class CompareModePanel extends JPanel {
         });
         bottomPanel.add(resetArrayButton);
 
-        JButton startButton = createStyledButton("Start");
+        JButton startButton = ElementCreater.createButton("Start", 12);
         startButton.setPreferredSize(new Dimension(60, 30));
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -207,14 +203,5 @@ public class CompareModePanel extends JPanel {
         bottomPanel.add(startButton);
 
         add(bottomPanel, BorderLayout.SOUTH);
-    }
-
-    private JButton createStyledButton(String text) {
-        JButton button = new JButton(text);
-        button.setFont(new Font("Segoe UI", 1, 12));
-        button.setBackground(new Color(70, 130, 180));
-        button.setForeground(Color.BLACK);
-        button.setFocusPainted(false);
-        return button;
     }
 }

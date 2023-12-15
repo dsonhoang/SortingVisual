@@ -23,7 +23,7 @@ public class CustomCodePanel extends JPanel {
         JScrollPane scroller = new JScrollPane(editableArea);
         scroller.setPreferredSize(new Dimension(300, 600));
 
-        saveButton = createStyledButton("Save");
+        saveButton = ElementCreater.createButton("Save", 12);
         saveButton.setPreferredSize(new Dimension(60, 30));
 
         saveButton.addActionListener(new ActionListener() {
@@ -31,14 +31,14 @@ public class CustomCodePanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 saveCode();
                 JOptionPane.showMessageDialog(null, "Saved successfully!", "Save Notification", JOptionPane.INFORMATION_MESSAGE);
-                ListPanels.showPanel("ChoicePanel");
+                panelManager.showPanel("ChoicePanel");
             }
         });
 
 
-        backButton = createStyledButton("Back");
+        backButton = ElementCreater.createButton("Back", 12);
         backButton.setPreferredSize(new Dimension(60, 30));
-        backButton.addActionListener(e -> ListPanels.showPanel("ChoicePanel"));
+        backButton.addActionListener(e -> panelManager.showPanel("ChoicePanel"));
 
         JPanel footer = new JPanel();
         footer.add(saveButton);
@@ -92,14 +92,5 @@ public class CustomCodePanel extends JPanel {
         }
 
         return result;
-    }
-
-    private JButton createStyledButton(String text) {
-        JButton button = new JButton(text);
-        button.setFont(new Font("Segoe UI", 1, 12));
-        button.setBackground(new Color(70, 130, 180));
-        button.setForeground(Color.BLACK);
-        button.setFocusPainted(false);
-        return button;
     }
 }

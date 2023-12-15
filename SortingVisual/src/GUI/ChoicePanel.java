@@ -22,35 +22,25 @@ public class ChoicePanel extends JPanel {
         c.anchor = GridBagConstraints.NORTH;
         add(choiceLabel, c);
 
-        singleModeBtn = createStyledButton("Single Mode");
+        singleModeBtn = ElementCreater.createButton("Single Mode", 18);
         c.gridy = 1;
         add(singleModeBtn, c);
         singleModeBtn.addActionListener(e ->
-            ListPanels.showPanel("SingleModePanel")
+                panelManager.showPanel("SingleModePanel")
         );
 
-        compareModeBtn = createStyledButton("Compare Mode");
+        compareModeBtn = ElementCreater.createButton("Compare Mode", 18);
         c.gridy = 2;
         add(compareModeBtn, c);
         compareModeBtn.addActionListener(e ->
-            ListPanels.showPanel("CompareModePanel")
+                panelManager.showPanel("CompareModePanel")
         );
 
-        customCodeButton = createStyledButton("Your custom code");
+        customCodeButton = ElementCreater.createButton("Your custom code", 18);
         c.gridy = 3;
         add(customCodeButton, c);
         customCodeButton.addActionListener(e ->
-            ListPanels.showPanel("CustomCodePanel")
+                panelManager.showPanel("CustomCodePanel")
         );
-    }
-
-    private JButton createStyledButton(String text) {
-        JButton button = new JButton(text);
-        button.setFont(new Font("Segoe UI", 1, 18));
-        button.setBackground(new Color(21, 68, 53));
-        button.setForeground(Color.BLACK);
-        button.setFocusPainted(false);
-        button.setPreferredSize(new Dimension(200, 40));
-        return button;
     }
 }
