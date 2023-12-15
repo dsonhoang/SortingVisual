@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 class CompareMode extends JFrame {
     private JButton backButton;
     private JComboBox<String> sortAlgorithmCombo1;
+    private JComboBox<String> sortAlgorithmCombo2;
     private JPanel sortingPanelsContainer;
     private JPanel sortingPanel1;
     private JPanel sortingPanel2;
@@ -81,7 +82,7 @@ class CompareMode extends JFrame {
         });
         hbox.add(sortAlgorithmCombo1);
 
-        JComboBox sortAlgorithmCombo2 = new JComboBox<>(helper.getListAlgorithm().toArray(new String[0]));
+        sortAlgorithmCombo2 = new JComboBox<>(helper.getListAlgorithm().toArray(new String[0]));
         sortAlgorithmCombo2.setFont(new Font("Segoe UI", 1, 12));
         sortAlgorithmCombo2.addActionListener(new ActionListener() {
             @Override
