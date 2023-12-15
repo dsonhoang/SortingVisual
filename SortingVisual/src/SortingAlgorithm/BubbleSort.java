@@ -17,6 +17,7 @@ public class BubbleSort extends SortingAbstract implements SortingAlgorithm {
         this.swappedColumns = new ArrayList<>(); // New
     }
 
+
     @Override
     public void sort() {
         isRunning = true;
