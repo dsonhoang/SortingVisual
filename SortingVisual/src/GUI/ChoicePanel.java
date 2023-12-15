@@ -26,21 +26,21 @@ public class ChoicePanel extends JPanel {
         c.gridy = 1;
         add(singleModeBtn, c);
         singleModeBtn.addActionListener(e ->
-            ListPanels.showPanel("SingleModePanel")
+                ListPanels.showPanel("SingleModePanel")
         );
 
         compareModeBtn = createStyledButton("Compare Mode");
         c.gridy = 2;
         add(compareModeBtn, c);
         compareModeBtn.addActionListener(e ->
-            ListPanels.showPanel("CompareModePanel")
+                ListPanels.showPanel("CompareModePanel")
         );
 
         customCodeButton = createStyledButton("Your custom code");
         c.gridy = 3;
         add(customCodeButton, c);
         customCodeButton.addActionListener(e ->
-            ListPanels.showPanel("CustomCodePanel")
+                ListPanels.showPanel("CustomCodePanel")
         );
     }
 
