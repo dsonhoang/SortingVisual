@@ -82,7 +82,7 @@ public class ChartPanel extends JPanel {
 
     private int getMax(int index) {
         double max = 1.0;
-        for(int i = 0; i < data.length; i++) {
+        for (int i = 0; i < data.length; i++) {
             if (data[i][index] > max) {
                 max = data[i][index];
             }
@@ -95,8 +95,4 @@ public class ChartPanel extends JPanel {
         int maxInt = (int) (max + 1);
         return maxInt;
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/main
