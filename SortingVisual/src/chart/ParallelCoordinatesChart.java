@@ -83,16 +83,13 @@ public class ParallelCoordinatesChart extends JFrame {
     }
 
     public static void main(String[] args) {
-<<<<<<< HEAD
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
                  UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-=======
->>>>>>> origin/main
-        String[] names = {"first", "Second", "third", "4", "5","6"};
+        String[] names = {"first", "Second", "third", "4", "5", "6"};
         double[][] sampleData = {
                 {0.2, 0.4, 0.8, 0.6},
                 {0.5, 0.3, 0.7, 0.2},
@@ -105,8 +102,4 @@ public class ParallelCoordinatesChart extends JFrame {
 
         ParallelCoordinatesChart chart = new ParallelCoordinatesChart(sampleData, names);
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/main
