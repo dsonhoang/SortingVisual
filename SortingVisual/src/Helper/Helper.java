@@ -24,25 +24,26 @@ public class Helper {
 
     public List<String> getListAlgorithm() {
         List<String> list = new ArrayList<String>();
+        list.add("Binary Insertion Sort");
+        list.add("Bitonic Sort (Only works properly with arrays whose number of elements is a power of 2)");
+        list.add("Block Merge Sort");
         list.add("Bubble Sort");
+        list.add("Cocktail Shaker Sort");
+        list.add("Comb Sort");
+        list.add("Custom Sort");
+        list.add("Cycle Sort");
+        list.add("Gnome Sort");
         list.add("Heap Sort");
         list.add("Insertion Sort");
         list.add("Merge Sort");
+        list.add("Odd Even Sort");
         list.add("Quick Sort");
         list.add("Radix Sort");
         list.add("Selection Sort");
         list.add("Shell Sort");
-        list.add("Custom Sort");
-        list.add("Binary Insertion Sort");
-        list.add("Bitonic Sort");
-        list.add("Block Merge Sort");
-        list.add("Cocktail Shaker Sort");
-        list.add("Comb Sort");
-        list.add("Cycle Sort");
-        list.add("Gnome Sort");
-        list.add("Odd Even Sort");
+        list.add("Smooth Sort");
+        list.add("Standard Sort");
         list.add("Tim Sort");
-        list.add("Std Sort");
         return list;
     }
 
@@ -68,7 +69,7 @@ public class Helper {
                 return new CustomSort(values);
             case "Binary Insertion Sort":
                 return new BinaryInsertionSort(values);
-            case "Bitonic Sort":
+            case "Bitonic Sort (Only works properly with arrays whose number of elements is a power of 2)":
                 return new BitonicSort(values);
             case "Block Merge Sort":
                 return new BlockMergeSort(values);
@@ -82,10 +83,12 @@ public class Helper {
                 return new GnomeSort(values);
             case "Odd Even Sort":
                 return new OddEvenSort(values);
-            case "Std Sort":
-                return new StandardSort(values);
             case "Tim Sort":
                 return new TimSort(values);
+            case "Smooth Sort":
+                return new SmoothSort(values);
+            case "Standard Sort":
+                return new StandardSort(values);
             default:
                 return null;
         }

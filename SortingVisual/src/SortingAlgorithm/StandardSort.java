@@ -23,28 +23,35 @@ public class StandardSort extends SortingAbstract {
         long startTime = System.nanoTime();
 
         int n = values.length;
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < n - i - 1; j++) {
-                accessCount++;
-                comparisons++;
-                if (values[j] > values[j + 1]) {
-                    comparisons++;
-                    swap(values, j, j + 1);
+        boolean swapped;
 
+        do {
+            swapped = false;
+            for (int i = 1; i < n; i++) {
+                accessCount++;
+                if (values[i - 1] > values[i]) {
+                    comparisons++;
+                    // Hoán đổi các phần tử nếu cần thiết
+                    swap(values, i - 1, i);
                     markedColumns.clear();
-                    markedColumns.add(j);
-                    markedColumns.add(j + 1);
-                    timeExecuted = (System.nanoTime() - startTime) / 1e6;
+                    markedColumns.add(i - 1);
+                    markedColumns.add(i);
                     sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
                     notifyDisplay();
+
+                    swapped = true;
                 }
+                timeExecuted = (System.nanoTime() - startTime) / 1e6;
             }
-        }
+        } while (swapped);
 
         long endTime = System.nanoTime();
         timeExecuted = (endTime - startTime) / 1e6;
-
         isRunning = false;
+
+        sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
+        sortingDisplay.setSorted(true);
+        notifyDisplay();
     }
 
 
@@ -52,6 +59,7 @@ public class StandardSort extends SortingAbstract {
         int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
+        swapCount++;
     }
 
     @Override
@@ -85,6 +93,7 @@ public class StandardSort extends SortingAbstract {
     @Override
     public void reset() {
         super.reset();
+        sortingDisplay.setSorted(false);
         sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
     }
 }

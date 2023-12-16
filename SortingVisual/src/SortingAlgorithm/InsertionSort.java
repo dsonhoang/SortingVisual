@@ -52,6 +52,9 @@ public class InsertionSort extends SortingAbstract implements SortingAlgorithm {
             notifyDisplay();
         }
 
+        sortingDisplay.setSorted(true);
+        notifyDisplay();
+
         long endTime = System.nanoTime();
         timeExecuted = (endTime - startTime) / 1e6; // Convert to milliseconds
         isRunning = false;
@@ -87,6 +90,7 @@ public class InsertionSort extends SortingAbstract implements SortingAlgorithm {
     @Override
     public void reset() {
         super.reset();
+        sortingDisplay.setSorted(false);
         sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
     }
 }

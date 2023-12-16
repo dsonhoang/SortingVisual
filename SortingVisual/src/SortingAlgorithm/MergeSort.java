@@ -24,6 +24,9 @@ public class MergeSort extends SortingAbstract{
 
         mergeSort(values, 0, values.length - 1, startTime);
 
+        sortingDisplay.setSorted(true);
+        notifyDisplay();
+
         isRunning = false;
     }
 
@@ -153,6 +156,7 @@ public class MergeSort extends SortingAbstract{
     @Override
     public void reset() {
         super.reset();
+        sortingDisplay.setSorted(false);
         sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
     }
 }

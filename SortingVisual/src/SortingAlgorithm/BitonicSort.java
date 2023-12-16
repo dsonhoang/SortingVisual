@@ -22,40 +22,37 @@ public class BitonicSort extends SortingAbstract {
         isRunning = true;
         long startTime = System.nanoTime();
 
-        bitonicSort(0, values.length, true);
+        bitonicSort(0, values.length, true, startTime);
+
+        sortingDisplay.setSorted(true);
+        notifyDisplay();
 
         long endTime = System.nanoTime();
         timeExecuted = (endTime - startTime) / 1e6;
-
-        isRunning = false;
         sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
-        sortingDisplay.setSorted(true);
-
-        notifyDisplay();
-        for(int i = 0; i < values.length; i++) {
-            System.out.print(values[i] + " ");
-        }
-
+        isRunning = false;
     }
 
 
-    private void bitonicSort(int low, int count, boolean ascending) {
+    private void bitonicSort(int low, int count, boolean ascending, long startTime) {
         if (count > 1) {
             int k = count / 2;
-            bitonicSort(low, k, true);
-            bitonicSort(low + k, k, false);
-            bitonicMerge(low, count, ascending);
+            timeExecuted = (System.nanoTime() - startTime) / 1e6;
+            bitonicSort(low, k, true, startTime);
+            bitonicSort(low + k, k, false, startTime);
+            bitonicMerge(low, count, ascending, startTime);
         }
     }
 
-    private void bitonicMerge(int low, int count, boolean ascending) {
+    private void bitonicMerge(int low, int count, boolean ascending, long startTime) {
         if (count > 1) {
             int k = count / 2;
             for (int i = low; i < low + k; i++) {
                 compareAndSwap(i, i + k, ascending);
+                timeExecuted = (System.nanoTime() - startTime) / 1e6;
             }
-            bitonicMerge(low, k, ascending);
-            bitonicMerge(low + k, k, ascending);
+            bitonicMerge(low, k, ascending, startTime);
+            bitonicMerge(low + k, k, ascending, startTime);
         }
     }
 

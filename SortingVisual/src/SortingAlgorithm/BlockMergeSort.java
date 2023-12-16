@@ -30,7 +30,6 @@ public class BlockMergeSort extends SortingAbstract {
         isRunning = false;
         sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
         sortingDisplay.setSorted(true);
-
         notifyDisplay();
     }
 

@@ -1,5 +1,7 @@
 package GUI;
 
+import SortingAlgorithm.SortingAbstract;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
@@ -66,10 +68,12 @@ public class SortingDisplay extends JPanel {
         }
 
         g.setFont(new Font("Arial", Font.BOLD, 10));
+        g.setColor(Color.RED);
         g.drawString("Access Count: " + accessCount, 10, 20);
         g.drawString("Comparisons: " + comparisons, 10, 40);
         g.drawString("Swap Count: " + swapCount, 10, 60);
         g.drawString("Time Executed: " + String.format("%.2f", timeExecuted / 1000.0) + " s", 10, 80);
+        g.drawString("Delay: " + SortingAbstract.DELAY, 10, 100);
     }
 
     private int getMaxValue() {

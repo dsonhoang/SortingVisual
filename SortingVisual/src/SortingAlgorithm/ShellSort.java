@@ -54,6 +54,9 @@ public class ShellSort extends SortingAbstract {
             gap /= 2;
         }
 
+        sortingDisplay.setSorted(true);
+        notifyDisplay();
+
         isRunning = false;
     }
 
@@ -88,6 +91,7 @@ public class ShellSort extends SortingAbstract {
     @Override
     public void reset() {
         super.reset();
+        sortingDisplay.setSorted(false);
         sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
     }
 }

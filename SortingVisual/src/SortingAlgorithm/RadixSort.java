@@ -24,7 +24,7 @@ public class RadixSort extends SortingAbstract {
 
         int max = getMaxValue();
         for (int exp = 1; max / exp > 0; exp *= 10) {
-            countSort(exp);
+            countSort(exp, startTime);
         }
 
         long endTime = System.nanoTime();
@@ -49,22 +49,25 @@ public class RadixSort extends SortingAbstract {
         return max;
     }
 
-    private void countSort(int exp) {
+    private void countSort(int exp, long startTime) {
         int n = values.length;
         int[] output = new int[n];
         int[] count = new int[10];
 
         for (int i = 0; i < n; i++) {
             count[(values[i] / exp) % 10]++;
+            timeExecuted = (System.nanoTime() - startTime) / 1e6;
         }
 
         for (int i = 1; i < 10; i++) {
             count[i] += count[i - 1];
+            timeExecuted = (System.nanoTime() - startTime) / 1e6;
         }
 
         for (int i = n - 1; i >= 0; i--) {
             output[count[(values[i] / exp) % 10] - 1] = values[i];
             count[(values[i] / exp) % 10]--;
+            timeExecuted = (System.nanoTime() - startTime) / 1e6;
         }
 
         for (int i = 0; i < n; i++) {
@@ -72,6 +75,7 @@ public class RadixSort extends SortingAbstract {
             swapCount++;
             markedColumns.clear();
             markedColumns.add(i);
+            timeExecuted = (System.nanoTime() - startTime) / 1e6;
             sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
             notifyDisplay();
         }
