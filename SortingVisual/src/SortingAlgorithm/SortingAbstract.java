@@ -1,12 +1,12 @@
 package SortingAlgorithm;
 
-public abstract class SortingAbstract {
+public abstract class SortingAbstract implements SortingAlgorithm {
     protected int accessCount;
     protected int comparisons;
     protected int swapCount;
     protected double timeExecuted;
     protected boolean isRunning;
-    public static final int DELAY = 3;
+    public static final int DELAY = 40;
 
     public SortingAbstract() {
         accessCount = 0;

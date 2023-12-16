@@ -2,14 +2,19 @@ package SortingAlgorithm;
 
 import GUI.SortingDisplay;
 
-public class SelectionSort extends SortingAbstract implements SortingAlgorithm {
+import java.util.ArrayList;
+import java.util.List;
+
+public class SelectionSort extends SortingAbstract{
     private int[] values;
     private SortingDisplay sortingDisplay;
+    private List<Integer> markedColumns;
 
     public SelectionSort(int[] values) {
         super();
         this.values = values;
         this.sortingDisplay = new SortingDisplay(values);
+        this.markedColumns = new ArrayList<>();
     }
 
     @Override
@@ -25,17 +30,26 @@ public class SelectionSort extends SortingAbstract implements SortingAlgorithm {
                 if (values[j] < values[minIndex]) {
                     minIndex = j;
                 }
+                markedColumns.clear(); // Clear the previous swapped columns
+                markedColumns.add(j); // Add the first column being swapped
+                markedColumns.add(minIndex);
                 comparisons++;
             }
 
             int tmp = values[minIndex];
             values[minIndex] = values[i];
             values[i] = tmp;
+            markedColumns.clear(); // Clear the previous swapped columns
+            markedColumns.add(i); // Add the first column being swapped
+            markedColumns.add(minIndex);
             swapCount++;
             timeExecuted = (System.nanoTime() - startTime) / 1e6;
-            sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
+            sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
             notifyDisplay();
         }
+
+        sortingDisplay.setSorted(true);
+        notifyDisplay();
 
         long endTime = System.nanoTime();
         timeExecuted = (endTime - startTime) / 1e6; // Convert to milliseconds
@@ -72,6 +86,7 @@ public class SelectionSort extends SortingAbstract implements SortingAlgorithm {
     @Override
     public void reset() {
         super.reset();
-        sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
+        sortingDisplay.setSorted(false);
+        sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
     }
 }

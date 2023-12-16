@@ -5,16 +5,16 @@ import GUI.SortingDisplay;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BubbleSort extends SortingAbstract implements SortingAlgorithm {
+public class BubbleSort extends SortingAbstract{
     private int[] values;
     private SortingDisplay sortingDisplay;
-    private List<Integer> swappedColumns; // New
+    private List<Integer> markedColumns; // New
 
     public BubbleSort(int[] values) {
         super();
         this.values = values;
         this.sortingDisplay = new SortingDisplay(values);
-        this.swappedColumns = new ArrayList<>(); // New
+        this.markedColumns = new ArrayList<>();
     }
 
 
@@ -32,11 +32,11 @@ public class BubbleSort extends SortingAbstract implements SortingAlgorithm {
                     values[j] = values[j + 1];
                     values[j + 1] = temp;
                     swapCount++;
-                    swappedColumns.clear(); // Clear the previous swapped columns
-                    swappedColumns.add(j); // Add the first column being swapped
-                    swappedColumns.add(j + 1);
+                    markedColumns.clear(); // Clear the previous swapped columns
+                    markedColumns.add(j); // Add the first column being swapped
+                    markedColumns.add(j + 1);
                     timeExecuted = (System.nanoTime() - startTime) / 1e6;
-                    sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, swappedColumns);
+                    sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
                     notifyDisplay();
                 }
                 comparisons++;
@@ -48,7 +48,7 @@ public class BubbleSort extends SortingAbstract implements SortingAlgorithm {
 
         long endTime = System.nanoTime();
         timeExecuted = (endTime - startTime) / 1e6;
-        sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, swappedColumns);
+        sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
         isRunning = false;
     }
 
@@ -85,6 +85,6 @@ public class BubbleSort extends SortingAbstract implements SortingAlgorithm {
     public void reset() {
         super.reset();
         sortingDisplay.setSorted(false);
-        sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, swappedColumns);
+        sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
     }
 }

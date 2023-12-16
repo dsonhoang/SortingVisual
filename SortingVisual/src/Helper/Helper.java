@@ -33,7 +33,16 @@ public class Helper {
         list.add("Selection Sort");
         list.add("Shell Sort");
         list.add("Custom Sort");
-
+        list.add("Binary Insertion Sort");
+        list.add("Bitonic Sort");
+        list.add("Block Merge Sort");
+        list.add("Cocktail Shaker Sort");
+        list.add("Comb Sort");
+        list.add("Cycle Sort");
+        list.add("Gnome Sort");
+        list.add("Odd Even Sort");
+        list.add("Tim Sort");
+        list.add("Std Sort");
         return list;
     }
 
@@ -57,6 +66,26 @@ public class Helper {
                 return new RadixSort(values);
             case "Custom Sort":
                 return new CustomSort(values);
+            case "Binary Insertion Sort":
+                return new BinaryInsertionSort(values);
+            case "Bitonic Sort":
+                return new BitonicSort(values);
+            case "Block Merge Sort":
+                return new BlockMergeSort(values);
+            case "Cocktail Shaker Sort":
+                return new CocktailShakerSort(values);
+            case "Comb Sort":
+                return new CombSort(values);
+            case "Cycle Sort":
+                return new CycleSort(values);
+            case "Gnome Sort":
+                return new GnomeSort(values);
+            case "Odd Even Sort":
+                return new OddEvenSort(values);
+            case "Std Sort":
+                return new StandardSort(values);
+            case "Tim Sort":
+                return new TimSort(values);
             default:
                 return null;
         }

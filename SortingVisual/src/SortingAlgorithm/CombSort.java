@@ -5,12 +5,12 @@ import GUI.SortingDisplay;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HeapSort extends SortingAbstract implements SortingAlgorithm {
+public class CombSort extends SortingAbstract {
     private int[] values;
     private SortingDisplay sortingDisplay;
     private List<Integer> markedColumns;
 
-    public HeapSort(int[] values) {
+    public CombSort(int[] values) {
         super();
         this.values = values;
         this.sortingDisplay = new SortingDisplay(values);
@@ -23,27 +23,34 @@ public class HeapSort extends SortingAbstract implements SortingAlgorithm {
         long startTime = System.nanoTime();
 
         int n = values.length;
+        int gap = n;
+        boolean swapped = true;
 
-        // Build max heap
-        for (int i = n / 2 - 1; i >= 0; i--) {
-            heapify(n, i, startTime);
-        }
+        while (gap > 1 || swapped) {
+            gap = getNextGap(gap);
+            swapped = false;
 
-        // Extract elements from heap one by one
-        for (int i = n - 1; i >= 0; i--) {
-            accessCount++;
-            int temp = values[0];
-            values[0] = values[i];
-            values[i] = temp;
-            swapCount++;
-            markedColumns.clear(); // Clear the previous swapped columns
-            markedColumns.add(0); // Add the root column being swapped
-            markedColumns.add(i);
+            for (int i = 0; i < n - gap; i++) {
+                accessCount++;
+                if (values[i] > values[i + gap]) {
+                    swap(i, i + gap);
+                    swapped = true;
+
+                    markedColumns.clear(); // Clear the previous swapped columns
+                    markedColumns.add(i); // Add the first column being swapped
+                    markedColumns.add(i + gap);
+                    swapCount++;
+                    timeExecuted = (System.nanoTime() - startTime) / 1e6;
+                    sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
+
+                    notifyDisplay();
+                }
+                comparisons++;
+            }
+
             timeExecuted = (System.nanoTime() - startTime) / 1e6;
             sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
             notifyDisplay();
-
-            heapify(i, 0, startTime);
         }
 
         sortingDisplay.setSorted(true);
@@ -55,43 +62,19 @@ public class HeapSort extends SortingAbstract implements SortingAlgorithm {
         isRunning = false;
     }
 
-    private void heapify(int n, int i, long startTime) {
-        int largest = i;
-        int left = 2 * i + 1;
-        int right = 2 * i + 2;
+    private void swap(int i, int j) {
+        int temp = values[i];
+        values[i] = values[j];
+        values[j] = temp;
+        swapCount++;
+    }
 
-        accessCount++;
-
-        if (left < n && values[left] > values[largest]) {
-            comparisons++;
-            accessCount++;
-            largest = left;
+    private int getNextGap(int gap) {
+        gap = (gap * 10) / 13;
+        if (gap < 1) {
+            return 1;
         }
-
-        if (right < n && values[right] > values[largest]) {
-            comparisons++;
-            accessCount++;
-            largest = right;
-        }
-
-        if (largest != i) {
-            comparisons++;
-            accessCount++;
-            int swap = values[i];
-            values[i] = values[largest];
-            values[largest] = swap;
-            swapCount++;
-            markedColumns.clear(); // Clear the previous swapped columns
-            markedColumns.add(i);
-            markedColumns.add(largest);
-            timeExecuted = (System.nanoTime() - startTime) / 1e6;
-            sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
-            notifyDisplay();
-
-            heapify(n, largest, startTime);
-        }
-
-        comparisons += 3;
+        return gap;
     }
 
     @Override

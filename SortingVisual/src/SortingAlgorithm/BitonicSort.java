@@ -5,12 +5,12 @@ import GUI.SortingDisplay;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RadixSort extends SortingAbstract {
+public class BitonicSort extends SortingAbstract {
     private int[] values;
     private SortingDisplay sortingDisplay;
     private List<Integer> markedColumns;
 
-    public RadixSort(int[] values) {
+    public BitonicSort(int[] values) {
         super();
         this.values = values;
         this.sortingDisplay = new SortingDisplay(values);
@@ -22,10 +22,7 @@ public class RadixSort extends SortingAbstract {
         isRunning = true;
         long startTime = System.nanoTime();
 
-        int max = getMaxValue();
-        for (int exp = 1; max / exp > 0; exp *= 10) {
-            countSort(exp);
-        }
+        bitonicSort(0, values.length, true);
 
         long endTime = System.nanoTime();
         timeExecuted = (endTime - startTime) / 1e6;
@@ -35,46 +32,52 @@ public class RadixSort extends SortingAbstract {
         sortingDisplay.setSorted(true);
 
         notifyDisplay();
+        for(int i = 0; i < values.length; i++) {
+            System.out.print(values[i] + " ");
+        }
+
     }
 
-    private int getMaxValue() {
-        int max = values[0];
-        for (int i = 1; i < values.length; i++) {
-            accessCount++;
-            comparisons++;
-            if (values[i] > max) {
-                max = values[i];
+
+    private void bitonicSort(int low, int count, boolean ascending) {
+        if (count > 1) {
+            int k = count / 2;
+            bitonicSort(low, k, true);
+            bitonicSort(low + k, k, false);
+            bitonicMerge(low, count, ascending);
+        }
+    }
+
+    private void bitonicMerge(int low, int count, boolean ascending) {
+        if (count > 1) {
+            int k = count / 2;
+            for (int i = low; i < low + k; i++) {
+                compareAndSwap(i, i + k, ascending);
             }
+            bitonicMerge(low, k, ascending);
+            bitonicMerge(low + k, k, ascending);
         }
-        return max;
     }
 
-    private void countSort(int exp) {
-        int n = values.length;
-        int[] output = new int[n];
-        int[] count = new int[10];
-
-        for (int i = 0; i < n; i++) {
-            count[(values[i] / exp) % 10]++;
+    private void compareAndSwap(int a, int b, boolean ascending) {
+        accessCount += 2;
+        comparisons++;
+        if ((values[a] > values[b] && ascending) || (values[a] < values[b] && !ascending)) {
+            swap(a, b);
         }
+    }
 
-        for (int i = 1; i < 10; i++) {
-            count[i] += count[i - 1];
-        }
+    private void swap(int a, int b) {
+        int temp = values[a];
+        values[a] = values[b];
+        values[b] = temp;
+        swapCount++;
+        markedColumns.clear();
+        markedColumns.add(a);
+        markedColumns.add(b);
+        sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
 
-        for (int i = n - 1; i >= 0; i--) {
-            output[count[(values[i] / exp) % 10] - 1] = values[i];
-            count[(values[i] / exp) % 10]--;
-        }
-
-        for (int i = 0; i < n; i++) {
-            values[i] = output[i];
-            swapCount++;
-            markedColumns.clear();
-            markedColumns.add(i);
-            sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
-            notifyDisplay();
-        }
+        notifyDisplay();
     }
 
     @Override

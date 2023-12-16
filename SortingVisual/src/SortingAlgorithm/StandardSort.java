@@ -5,15 +5,15 @@ import GUI.SortingDisplay;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShellSort extends SortingAbstract {
+public class StandardSort extends SortingAbstract {
     private int[] values;
     private SortingDisplay sortingDisplay;
     private List<Integer> markedColumns;
 
-    public ShellSort(int[] values) {
+    public StandardSort(int[] values) {
         super();
         this.values = values;
-        this.sortingDisplay = new SortingDisplay(values);
+        sortingDisplay = new SortingDisplay(values);
         markedColumns = new ArrayList<>();
     }
 
@@ -23,38 +23,35 @@ public class ShellSort extends SortingAbstract {
         long startTime = System.nanoTime();
 
         int n = values.length;
-        int gap = n / 2;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                accessCount++;
+                comparisons++;
+                if (values[j] > values[j + 1]) {
+                    comparisons++;
+                    swap(values, j, j + 1);
 
-        while (gap > 0) {
-            for (int i = gap; i < n; i++) {
-                int temp = values[i];
-                int j = i;
-
-                while (j >= gap && values[j - gap] > temp) {
-                    accessCount += 2; // Two accesses: values[j - gap] and values[j]
-                    values[j] = values[j - gap];
-
-                    markedColumns.clear(); // Clear the previous swapped columns
-                    markedColumns.add(j); // Add the first column being swapped
-                    markedColumns.add(j - gap);
+                    markedColumns.clear();
+                    markedColumns.add(j);
+                    markedColumns.add(j + 1);
                     timeExecuted = (System.nanoTime() - startTime) / 1e6;
                     sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
                     notifyDisplay();
-
-                    j -= gap;
-                    swapCount++;
-                    comparisons++;
                 }
-
-                values[j] = temp;
-                accessCount++;
-
             }
-
-            gap /= 2;
         }
 
+        long endTime = System.nanoTime();
+        timeExecuted = (endTime - startTime) / 1e6;
+
         isRunning = false;
+    }
+
+
+    private void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
 
     @Override

@@ -2,15 +2,20 @@ package SortingAlgorithm;
 
 import GUI.SortingDisplay;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class InsertionSort extends SortingAbstract implements SortingAlgorithm {
 
     private int[] values;
     private SortingDisplay sortingDisplay;
+    private List<Integer> markedColumns;
 
     public InsertionSort(int[] values) {
         super();
         this.values = values;
         this.sortingDisplay = new SortingDisplay(values);
+        markedColumns = new ArrayList<>();
     }
 
     @Override
@@ -26,17 +31,24 @@ public class InsertionSort extends SortingAbstract implements SortingAlgorithm {
             while (j >= 0 && values[j] > key) {
                 accessCount += 2;
                 values[j + 1] = values[j];
+                values[j] = key;
+
+                markedColumns.clear();
+                markedColumns.add(j);
+                markedColumns.add(j + 1);
+                markedColumns.add(j - 1);
+
                 j = j - 1;
                 swapCount++;
                 comparisons++;
                 timeExecuted = (System.nanoTime() - startTime) / 1e6;
-                sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
+                sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
                 notifyDisplay();
             }
             values[j + 1] = key;
             swapCount++;
             timeExecuted = (System.nanoTime() - startTime) / 1e6;
-            sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
+            sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
             notifyDisplay();
         }
 
@@ -75,6 +87,6 @@ public class InsertionSort extends SortingAbstract implements SortingAlgorithm {
     @Override
     public void reset() {
         super.reset();
-        sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
+        sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
     }
 }

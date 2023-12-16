@@ -2,14 +2,19 @@ package SortingAlgorithm;
 
 import GUI.SortingDisplay;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class QuickSort extends SortingAbstract implements SortingAlgorithm {
     private int[] values;
     private SortingDisplay sortingDisplay;
+    private List<Integer> markedColumns;
 
     public QuickSort(int[] values) {
         super();
         this.values = values;
         this.sortingDisplay = new SortingDisplay(values);
+        this.markedColumns = new ArrayList<>();
     }
 
     @Override
@@ -17,49 +22,61 @@ public class QuickSort extends SortingAbstract implements SortingAlgorithm {
         isRunning = true;
         long startTime = System.nanoTime();
 
-        quickSort(values, 0, values.length - 1, startTime);
+        quickSort(0, values.length - 1, startTime);
 
+        sortingDisplay.setSorted(true);
+        notifyDisplay();
+
+        long endTime = System.nanoTime();
+        timeExecuted = (endTime - startTime) / 1e6;
+        sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
         isRunning = false;
     }
 
-    private void quickSort(int[] arr, int low, int high, long startTime) {
+    private void quickSort(int low, int high, long startTime) {
         if (low < high) {
-            int partitionIndex = partition(arr, low, high, startTime);
+            int partitionIndex = partition(low, high, startTime);
 
-            quickSort(arr, low, partitionIndex - 1, startTime);
-            quickSort(arr, partitionIndex + 1, high, startTime);
+            quickSort(low, partitionIndex - 1, startTime);
+            quickSort(partitionIndex + 1, high, startTime);
         }
     }
 
-    private int partition(int[] arr, int low, int high, long startTime) {
-        int pivot = arr[high];
+    private int partition(int low, int high, long startTime) {
+        int pivot = values[high];
         int i = low - 1;
 
         for (int j = low; j < high; j++) {
-            accessCount++;
-
-            timeExecuted = (System.nanoTime() - startTime) / 1e6;
-            sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
-
-            if (arr[j] < pivot) {
+            accessCount += 2;
+            if (values[j] <= pivot) {
                 i++;
 
-                int temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
+                int temp = values[i];
+                values[i] = values[j];
+                values[j] = temp;
+
                 swapCount++;
 
+                markedColumns.clear(); // Clear the previous swapped columns
+                markedColumns.add(i); // Add the partitioned column
+                markedColumns.add(j);
+
+                timeExecuted = (System.nanoTime() - startTime) / 1e6;
+                sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
                 notifyDisplay();
             }
-
             comparisons++;
         }
+        int temp = values[i + 1];
+        values[i + 1] = values[high];
+        values[high] = temp;
 
-        int temp = arr[i + 1];
-        arr[i + 1] = arr[high];
-        arr[high] = temp;
-        swapCount++;
+        markedColumns.clear(); // Clear the previous swapped columns
+        markedColumns.add(i + 1); // Add the partitioned column
+        markedColumns.add(high);
+        timeExecuted = (System.nanoTime() - startTime) / 1e6;
 
+        sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
         notifyDisplay();
 
         return i + 1;
@@ -96,6 +113,7 @@ public class QuickSort extends SortingAbstract implements SortingAlgorithm {
     @Override
     public void reset() {
         super.reset();
-        sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
+        sortingDisplay.setSorted(false);
+        sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
     }
 }

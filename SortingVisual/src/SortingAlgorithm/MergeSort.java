@@ -2,14 +2,19 @@ package SortingAlgorithm;
 
 import GUI.SortingDisplay;
 
-public class MergeSort extends SortingAbstract implements SortingAlgorithm {
+import java.util.ArrayList;
+import java.util.List;
+
+public class MergeSort extends SortingAbstract{
     private int[] values;
     private SortingDisplay sortingDisplay;
+    private List<Integer> markedColumns;
 
     public MergeSort(int[] values) {
         super();
         this.values = values;
         this.sortingDisplay = new SortingDisplay(values);
+        this.markedColumns = new ArrayList<>();
     }
 
     @Override
@@ -44,15 +49,21 @@ public class MergeSort extends SortingAbstract implements SortingAlgorithm {
             leftArray[i] = arr[low + i];
             accessCount++;
 
+            markedColumns.clear(); // Clear the previous swapped columns
+            markedColumns.add(i + low); // Add the first column being swapped
+            markedColumns.add(i + low + low);
             timeExecuted = (System.nanoTime() - startTime) / 1e6;
-            sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
+            sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
         }
         for (int j = 0; j < n2; ++j) {
             rightArray[j] = arr[mid + 1 + j];
             accessCount++;
+            markedColumns.clear(); // Clear the previous swapped columns
+            markedColumns.add(j + mid); // Add the first column being swapped
+            markedColumns.add(j + mid + 1);
 
             timeExecuted = (System.nanoTime() - startTime) / 1e6;
-            sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
+            sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
         }
 
         int i = 0, j = 0;
@@ -67,10 +78,13 @@ public class MergeSort extends SortingAbstract implements SortingAlgorithm {
                 arr[k] = rightArray[j];
                 j++;
             }
-            swapCount++;
 
+            markedColumns.clear(); // Clear the previous swapped columns
+            markedColumns.add(i + low); // Add the first column being swapped
+            markedColumns.add(j + mid);
+            swapCount++;
             timeExecuted = (System.nanoTime() - startTime) / 1e6;
-            sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
+            sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
 
             notifyDisplay();
 
@@ -81,24 +95,28 @@ public class MergeSort extends SortingAbstract implements SortingAlgorithm {
             arr[k] = leftArray[i];
             i++;
             k++;
-
+            markedColumns.clear(); // Clear the previous swapped columns
+            markedColumns.add(i + low); // Add the first column being swapped
+            markedColumns.add(k);
             swapCount++;
 
             timeExecuted = (System.nanoTime() - startTime) / 1e6;
-            sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
-
+            sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
             notifyDisplay();
         }
 
         while (j < n2) {
             arr[k] = rightArray[j];
+
+            markedColumns.clear(); // Clear the previous swapped columns
+            markedColumns.add(j + mid); // Add the first column being swapped
+            markedColumns.add(k);
             j++;
             k++;
-
             swapCount++;
 
             timeExecuted = (System.nanoTime() - startTime) / 1e6;
-            sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
+            sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
 
             notifyDisplay();
         }
@@ -135,6 +153,6 @@ public class MergeSort extends SortingAbstract implements SortingAlgorithm {
     @Override
     public void reset() {
         super.reset();
-        sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted);
+        sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
     }
 }
