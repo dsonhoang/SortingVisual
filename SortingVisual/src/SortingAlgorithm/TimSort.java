@@ -158,6 +158,7 @@ public class TimSort extends SortingAbstract {
             swapCount++;
             markedColumns.clear();
             markedColumns.add(k);
+            markedColumns.add(i);
             timeExecuted = (System.nanoTime() - startTime) / 1e6;
             sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
             notifyDisplay();
@@ -170,6 +171,7 @@ public class TimSort extends SortingAbstract {
             swapCount++;
             markedColumns.clear();
             markedColumns.add(k);
+            markedColumns.add(j);
             timeExecuted = (System.nanoTime() - startTime) / 1e6;
             sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
 
