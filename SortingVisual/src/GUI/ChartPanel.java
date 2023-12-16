@@ -95,4 +95,8 @@ public class ChartPanel extends JPanel {
         int maxInt = (int) (max + 1);
         return maxInt;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/main
