@@ -201,7 +201,6 @@ public class TimSort extends SortingAbstract {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
         }
     }
 
