@@ -10,5 +10,6 @@ public interface SortingAlgorithm {
     int[] getValues();
 
     SortingDisplay getSortingDisplay();
+    double[] getStatistics();
     boolean isRunning();
 }
