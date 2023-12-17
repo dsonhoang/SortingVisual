@@ -4,13 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ElementCreater {
-    public static JButton createButton(String text, int size) {
+    public static JButton createButton(String text, int size, int width, int height) {
         JButton button = new JButton(text);
         button.setFont(new Font("Segoe UI", 1, size));
-        button.setBackground(new Color(21, 68, 53));
         button.setForeground(Color.BLACK);
         button.setFocusPainted(false);
-        button.setPreferredSize(new Dimension(200, 40));
         return button;
     }
 
