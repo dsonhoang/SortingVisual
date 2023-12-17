@@ -30,7 +30,6 @@ public class Helper {
         list.add("Bubble Sort");
         list.add("Cocktail Shaker Sort");
         list.add("Comb Sort");
-        list.add("Custom Sort");
         list.add("Cycle Sort");
         list.add("Gnome Sort");
         list.add("Heap Sort");
