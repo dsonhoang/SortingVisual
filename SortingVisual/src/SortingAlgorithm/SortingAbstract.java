@@ -23,6 +23,12 @@ public abstract class SortingAbstract implements SortingAlgorithm {
         timeExecuted = 0;
     }
 
+    @Override
+    public double[] getStatistics() {
+        double[] statistics = {accessCount, comparisons, swapCount, timeExecuted};
+        return statistics;
+    }
+
     public boolean isRunning() {
         return isRunning;
     }
