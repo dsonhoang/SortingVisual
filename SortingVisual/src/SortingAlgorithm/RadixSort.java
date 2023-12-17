@@ -10,8 +10,8 @@ public class RadixSort extends SortingAbstract {
     private SortingDisplay sortingDisplay;
     private List<Integer> markedColumns;
 
-    public RadixSort(int[] values) {
-        super();
+    public RadixSort(int[] values, boolean isVisual) {
+        super(isVisual);
         this.values = values;
         this.sortingDisplay = new SortingDisplay(values);
         this.markedColumns = new ArrayList<>();
@@ -106,6 +106,9 @@ public class RadixSort extends SortingAbstract {
     }
 
     private void notifyDisplay() {
+        if (!this.isVisual) {
+            return;
+        }
         if (sortingDisplay != null) {
             sortingDisplay.repaint();
             try {

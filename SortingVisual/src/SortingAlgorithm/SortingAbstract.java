@@ -6,9 +6,11 @@ public abstract class SortingAbstract implements SortingAlgorithm {
     protected int swapCount;
     protected double timeExecuted;
     protected boolean isRunning;
+    protected boolean isVisual;
     public static final int DELAY = 5;
 
-    public SortingAbstract() {
+    public SortingAbstract(boolean isVisual) {
+        this.isVisual = isVisual;
         accessCount = 0;
         comparisons = 0;
         swapCount = 0;

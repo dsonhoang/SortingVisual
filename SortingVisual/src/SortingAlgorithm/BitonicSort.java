@@ -10,8 +10,8 @@ public class BitonicSort extends SortingAbstract {
     private SortingDisplay sortingDisplay;
     private List<Integer> markedColumns;
 
-    public BitonicSort(int[] values) {
-        super();
+    public BitonicSort(int[] values, boolean isVisual) {
+        super(isVisual);
         this.values = values;
         this.sortingDisplay = new SortingDisplay(values);
         this.markedColumns = new ArrayList<>();
@@ -102,6 +102,9 @@ public class BitonicSort extends SortingAbstract {
     }
 
     private void notifyDisplay() {
+        if (!this.isVisual) {
+            return;
+        }
         if (sortingDisplay != null) {
             sortingDisplay.repaint();
             try {

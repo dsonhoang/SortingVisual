@@ -1,6 +1,7 @@
 package SortingAlgorithm;
 
 import GUI.SortingDisplay;
+import Helper.Helper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +11,8 @@ public class CycleSort extends SortingAbstract {
     private SortingDisplay sortingDisplay;
     private List<Integer> markedColumns;
 
-    public CycleSort(int[] values) {
-        super();
+    public CycleSort(int[] values, boolean isVisual) {
+        super(isVisual);
         this.values = values;
         this.sortingDisplay = new SortingDisplay(values);
         this.markedColumns = new ArrayList<>();
@@ -126,6 +127,9 @@ public class CycleSort extends SortingAbstract {
     }
 
     private void notifyDisplay() {
+        if (!this.isVisual) {
+            return;
+        }
         if (sortingDisplay != null) {
             sortingDisplay.repaint();
             try {

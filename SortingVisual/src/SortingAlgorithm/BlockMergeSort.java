@@ -10,8 +10,8 @@ public class BlockMergeSort extends SortingAbstract {
     private SortingDisplay sortingDisplay;
     private List<Integer> markedColumns;
 
-    public BlockMergeSort(int[] values) {
-        super();
+    public BlockMergeSort(int[] values, boolean isVisual) {
+        super(isVisual);
         this.values = values;
         this.sortingDisplay = new SortingDisplay(values);
         this.markedColumns = new ArrayList<>();
@@ -143,6 +143,9 @@ public class BlockMergeSort extends SortingAbstract {
     }
 
     private void notifyDisplay() {
+        if (!this.isVisual) {
+            return;
+        }
         if (sortingDisplay != null) {
             sortingDisplay.repaint();
             try {

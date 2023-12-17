@@ -10,8 +10,8 @@ public class OddEvenSort extends SortingAbstract {
     private SortingDisplay sortingDisplay;
     private List<Integer> markedColumns;
 
-    public OddEvenSort(int[] values) {
-        super();
+    public OddEvenSort(int[] values, boolean isVisual) {
+        super(isVisual);
         this.values = values;
         this.sortingDisplay = new SortingDisplay(values);
         this.markedColumns = new ArrayList<>();
@@ -99,6 +99,9 @@ public class OddEvenSort extends SortingAbstract {
     }
 
     private void notifyDisplay() {
+        if (!this.isVisual) {
+            return;
+        }
         if (sortingDisplay != null) {
             sortingDisplay.repaint();
             try {

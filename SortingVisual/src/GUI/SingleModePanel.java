@@ -51,7 +51,7 @@ public class SingleModePanel extends JPanel {
                     currentArr = helper.generateRandomIntArray(sortingAlgorithm.getValues().length);
                 }
 
-                sortingAlgorithm = helper.getSortSelected(selectedAlgorithm, currentArr);
+                sortingAlgorithm = helper.getSortSelected(selectedAlgorithm, currentArr, true);
                 JPanel newPanel = sortingAlgorithm.getSortingDisplay();
 
                 remove(sortingPanel);
@@ -69,7 +69,7 @@ public class SingleModePanel extends JPanel {
         add(topCenterPanel, BorderLayout.NORTH);
 
         int[] arr = helper.generateRandomIntArray(100);
-        sortingAlgorithm = helper.getSortSelected("Bubble Sort", arr);
+        sortingAlgorithm = helper.getSortSelected("Bubble Sort", arr, true);
         prevSelection = "Bubble Sort";
 
         sortingPanel = sortingAlgorithm.getSortingDisplay();

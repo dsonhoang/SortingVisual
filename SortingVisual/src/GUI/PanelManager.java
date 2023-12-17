@@ -1,5 +1,7 @@
 package GUI;
 
+import chart.ParallelCoordinatesChartPanel;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -30,12 +32,14 @@ public class PanelManager {
         ChoicePanel choicePanel = new ChoicePanel();
         SingleModePanel singleModePanel = new SingleModePanel();
         CompareModePanel compareModePanel = new CompareModePanel();
-        CustomCodePanel customCodeModePanel = new CustomCodePanel();
+//        CustomCodePanel customCodeModePanel = new CustomCodePanel();
+        ParallelCoordinatesChartPanel chart = new ParallelCoordinatesChartPanel();
 
         cardPanel.add(choicePanel, "ChoicePanel");
         cardPanel.add(singleModePanel, "SingleModePanel");
         cardPanel.add(compareModePanel, "CompareModePanel");
-        cardPanel.add(customCodeModePanel, "CustomCodePanel");
+//        cardPanel.add(customCodeModePanel, "CustomCodePanel");
+        cardPanel.add(chart, "ParallelCoordinatesChartPanel");
     }
 
     public static void showPanel(String panelName) {

@@ -14,7 +14,8 @@ public class ChartPanel extends JPanel {
     private Color[] lineColors = {
             Color.BLUE, Color.RED, Color.GREEN, Color.ORANGE, Color.GRAY,
             Color.YELLOW, Color.CYAN, Color.MAGENTA, Color.PINK, Color.LIGHT_GRAY,
-            Color.DARK_GRAY, Color.BLACK, Color.WHITE,
+            Color.DARK_GRAY, Color.BLACK,
+            new Color(170, 220, 109), // Light green
             new Color(255, 165, 0), // Orange
             new Color(138, 43, 226), // BlueViolet
             new Color(34, 139, 34), // ForestGreen
