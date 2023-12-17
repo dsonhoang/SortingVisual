@@ -3,6 +3,8 @@ package chart;
 import GUI.ChartPanel;
 import GUI.PanelManager;
 import Helper.ElementCreater;
+import Helper.Helper;
+import SortingAlgorithm.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -30,8 +32,7 @@ public class ParallelCoordinatesChart extends JFrame {
 
         Box hbox = Box.createHorizontalBox();
 
-        backButton = ElementCreater.createButton("Back", 12);
-        backButton.setPreferredSize(new Dimension(60, 30));
+        backButton = ElementCreater.createButton("Back", 12, 60, 30);
         backButton.addActionListener(e -> PanelManager.showPanel("ChoicePanel"));
         hbox.add(backButton);
 
@@ -45,8 +46,7 @@ public class ParallelCoordinatesChart extends JFrame {
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
-        JButton changeSizeButton = ElementCreater.createButton("Change array size", 12);
-        changeSizeButton.setPreferredSize(new Dimension(150, 30));
+        JButton changeSizeButton = ElementCreater.createButton("Change array size", 12, 150, 30);
         changeSizeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Handle the change size button action
@@ -55,8 +55,7 @@ public class ParallelCoordinatesChart extends JFrame {
         });
         bottomPanel.add(changeSizeButton);
 
-        JButton resetArrayButton = ElementCreater.createButton("Reset array", 12);
-        resetArrayButton.setPreferredSize(new Dimension(150, 30));
+        JButton resetArrayButton = ElementCreater.createButton("Reset array", 12, 150, 30);
         resetArrayButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
@@ -64,8 +63,7 @@ public class ParallelCoordinatesChart extends JFrame {
         });
         bottomPanel.add(resetArrayButton);
 
-        JButton startButton = ElementCreater.createButton("Start", 12);
-        startButton.setPreferredSize(new Dimension(60, 30));
+        JButton startButton = ElementCreater.createButton("Start", 12, 60, 30);
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Start");
@@ -89,16 +87,16 @@ public class ParallelCoordinatesChart extends JFrame {
                  UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-        String[] names = {"first", "Second", "third", "4", "5", "6"};
-        double[][] sampleData = {
-                {0.2, 0.4, 0.8, 0.6},
-                {0.5, 0.3, 0.7, 0.2},
-                {0.8, 0.2, 0.6, 0.5},
-                {1.5, 0.8, 0.6, 0.9},
-                {0.7, 2.5, 4.0, 0.5},
-                {1.2, 0.6, 6.0, 4}
-                // Add more data points as needed
-        };
+        Helper helper = new Helper();
+        int[] values = helper.generateRandomIntArray(50);
+        String[] names = helper.getListAlgorithm().toArray(new String[0]);
+        double[][] sampleData = new double[names.length][4];
+
+        for (int i = 0; i < sampleData.length; i++) {
+            SortingAlgorithm sortingAlgorithm = helper.getSortSelected(names[i], values);
+            sortingAlgorithm.sort();
+            sampleData[i] = sortingAlgorithm.getStatistics();
+        }
 
         ParallelCoordinatesChart chart = new ParallelCoordinatesChart(sampleData, names);
     }
