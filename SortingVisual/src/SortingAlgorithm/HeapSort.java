@@ -10,8 +10,8 @@ public class HeapSort extends SortingAbstract implements SortingAlgorithm {
     private SortingDisplay sortingDisplay;
     private List<Integer> markedColumns;
 
-    public HeapSort(int[] values) {
-        super();
+    public HeapSort(int[] values, boolean isVisual) {
+        super(isVisual);
         this.values = values;
         this.sortingDisplay = new SortingDisplay(values);
         this.markedColumns = new ArrayList<>();
@@ -112,6 +112,9 @@ public class HeapSort extends SortingAbstract implements SortingAlgorithm {
     }
 
     private void notifyDisplay() {
+        if (!this.isVisual) {
+            return;
+        }
         if (sortingDisplay != null) {
             sortingDisplay.repaint();
             try {

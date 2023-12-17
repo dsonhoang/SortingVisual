@@ -10,8 +10,8 @@ public class QuickSort extends SortingAbstract implements SortingAlgorithm {
     private SortingDisplay sortingDisplay;
     private List<Integer> markedColumns;
 
-    public QuickSort(int[] values) {
-        super();
+    public QuickSort(int[] values, boolean isVisual) {
+        super(isVisual);
         this.values = values;
         this.sortingDisplay = new SortingDisplay(values);
         this.markedColumns = new ArrayList<>();
@@ -100,6 +100,9 @@ public class QuickSort extends SortingAbstract implements SortingAlgorithm {
     }
 
     private void notifyDisplay() {
+        if (!this.isVisual) {
+            return;
+        }
         if (sortingDisplay != null) {
             sortingDisplay.repaint();
             try {

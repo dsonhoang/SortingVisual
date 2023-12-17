@@ -11,8 +11,8 @@ public class InsertionSort extends SortingAbstract implements SortingAlgorithm {
     private SortingDisplay sortingDisplay;
     private List<Integer> markedColumns;
 
-    public InsertionSort(int[] values) {
-        super();
+    public InsertionSort(int[] values, boolean isVisual) {
+        super(isVisual);
         this.values = values;
         this.sortingDisplay = new SortingDisplay(values);
         markedColumns = new ArrayList<>();
@@ -78,6 +78,9 @@ public class InsertionSort extends SortingAbstract implements SortingAlgorithm {
     }
 
     private void notifyDisplay() {
+        if (!this.isVisual) {
+            return;
+        }
         if (sortingDisplay != null) {
             sortingDisplay.repaint();
             try {

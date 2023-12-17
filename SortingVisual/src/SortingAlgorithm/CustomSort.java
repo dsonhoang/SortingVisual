@@ -6,8 +6,8 @@ public class CustomSort extends SortingAbstract implements SortingAlgorithm {
        private int[] values;
        private SortingDisplay sortingDisplay;
 
-       public CustomSort(int[] values) {
-              super();
+       public CustomSort(int[] values, boolean isVisual) {
+           super(isVisual);
               this.values = values;
               this.sortingDisplay = new SortingDisplay(values);
        }
@@ -64,6 +64,9 @@ public class CustomSort extends SortingAbstract implements SortingAlgorithm {
 
 
        private void notifyDisplay() {
+           if (!this.isVisual) {
+               return;
+           }
               if (sortingDisplay != null) {
                      sortingDisplay.repaint();
                      try {

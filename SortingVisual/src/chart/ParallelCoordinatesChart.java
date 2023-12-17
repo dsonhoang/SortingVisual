@@ -9,17 +9,27 @@ import SortingAlgorithm.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.*;
+import java.util.List;
 import javax.swing.*;
 
 public class ParallelCoordinatesChart extends JFrame {
     private JButton backButton;
     private ChartPanel chartPanel;
-    private final double[][] data;
-    private final String[] names;
+    private List<SortingAlgorithm> sortingAlgorithms = new ArrayList<SortingAlgorithm>();
 
-    public ParallelCoordinatesChart(double[][] data, String[] names) {
-        this.data = data;
-        this.names = names;
+    public ParallelCoordinatesChart() {
+        Helper helper = new Helper();
+        String[] names = helper.getListAlgorithm().toArray(new String[0]);
+        List<String> namesList = Arrays.asList(names);
+        double[][] sampleData = new double[names.length][4];
+
+        int[] arr = helper.generateRandomIntArray(100);
+
+        for (String name: names) {
+            SortingAlgorithm s = helper.getSortSelected(name, arr.clone(), false);
+            sortingAlgorithms.add(s);
+        }
 
         setLayout(new BorderLayout());
 
@@ -39,7 +49,7 @@ public class ParallelCoordinatesChart extends JFrame {
         topCenterPanel.add(hbox, BorderLayout.SOUTH);
         add(topCenterPanel, BorderLayout.NORTH);
 
-        chartPanel = new ChartPanel(this.data, this.names);
+        chartPanel = new ChartPanel(sampleData, names);
         add(chartPanel, BorderLayout.CENTER);
 
         // Create a panel for the bottom buttons
@@ -50,7 +60,45 @@ public class ParallelCoordinatesChart extends JFrame {
         changeSizeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Handle the change size button action
+                String input = JOptionPane.showInputDialog(null, "Enter the length of the new array:");
+                if (input != null) {
+                    try {
+                        int newArrayLength = Integer.parseInt(input);
 
+                        if (newArrayLength > 1000000 || newArrayLength <= 1) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Please enter an integer less or equal than 1000000 and greater than 1");
+                            return;
+                        }
+
+                        int[] newArray = helper.generateRandomIntArray(newArrayLength);
+
+                        List<Thread> threads = new ArrayList<>();
+                        for (String name : namesList) {
+                            Thread thread = new Thread(() -> {
+                                SortingAlgorithm sortingAlgorithm = helper.getSortSelected(name, newArray.clone(), false);
+                                sortingAlgorithm.sort();
+                                sampleData[namesList.indexOf(name)] = sortingAlgorithm.getStatistics();
+                            });
+
+                            threads.add(thread);
+                            thread.start();
+                        }
+
+                        for (Thread thread : threads) {
+                            try {
+                                thread.join();
+                            } catch (InterruptedException ex) {
+                                ex.printStackTrace();
+                            }
+                        }
+
+                        chartPanel.repaint();
+
+                    } catch (NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(null, "Please enter a valid integer.");
+                    }
+                }
             }
         });
         bottomPanel.add(changeSizeButton);
@@ -58,18 +106,32 @@ public class ParallelCoordinatesChart extends JFrame {
         JButton resetArrayButton = ElementCreater.createButton("Reset array", 12, 150, 30);
         resetArrayButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                int[] newArray = helper.generateRandomIntArray(sortingAlgorithms.get(0).getValues().length);
 
+                List<Thread> threads = new ArrayList<>();
+                for (String name : namesList) {
+                    Thread thread = new Thread(() -> {
+                        SortingAlgorithm sortingAlgorithm = helper.getSortSelected(name, newArray.clone(), false);
+                        sortingAlgorithm.sort();
+                        sampleData[namesList.indexOf(name)] = sortingAlgorithm.getStatistics();
+                    });
+
+                    threads.add(thread);
+                    thread.start();
+                }
+
+                for (Thread thread : threads) {
+                    try {
+                        thread.join();
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+
+                chartPanel.repaint();
             }
         });
         bottomPanel.add(resetArrayButton);
-
-        JButton startButton = ElementCreater.createButton("Start", 12, 60, 30);
-        startButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Start");
-            }
-        });
-        bottomPanel.add(startButton);
 
         add(bottomPanel, BorderLayout.SOUTH);
 
@@ -81,23 +143,6 @@ public class ParallelCoordinatesChart extends JFrame {
     }
 
     public static void main(String[] args) {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
-                 UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
-        }
-        Helper helper = new Helper();
-        int[] values = helper.generateRandomIntArray(50);
-        String[] names = helper.getListAlgorithm().toArray(new String[0]);
-        double[][] sampleData = new double[names.length][4];
-
-        for (int i = 0; i < sampleData.length; i++) {
-            SortingAlgorithm sortingAlgorithm = helper.getSortSelected(names[i], values);
-            sortingAlgorithm.sort();
-            sampleData[i] = sortingAlgorithm.getStatistics();
-        }
-
-        ParallelCoordinatesChart chart = new ParallelCoordinatesChart(sampleData, names);
+        ParallelCoordinatesChart chart = new ParallelCoordinatesChart();
     }
 }

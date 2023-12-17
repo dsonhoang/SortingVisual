@@ -54,7 +54,7 @@ public class CompareModePanel extends JPanel {
                     currentArr = helper.generateRandomIntArray(firstSortingAlgorithm.getValues().length);
                 }
 
-                firstSortingAlgorithm = helper.getSortSelected(selectedAlgorithm, currentArr);
+                firstSortingAlgorithm = helper.getSortSelected(selectedAlgorithm, currentArr, true);
                 secondSortingAlgorithm.setValues(currentArr.clone());
                 JPanel newPanel = firstSortingAlgorithm.getSortingDisplay();
                 newPanel.setPreferredSize(new Dimension(WIDTH, LENGTH));
@@ -89,7 +89,7 @@ public class CompareModePanel extends JPanel {
                     currentArr = helper.generateRandomIntArray(secondSortingAlgorithm.getValues().length);
                 }
 
-                secondSortingAlgorithm = helper.getSortSelected(selectedAlgorithm, currentArr);
+                secondSortingAlgorithm = helper.getSortSelected(selectedAlgorithm, currentArr, true);
                 firstSortingAlgorithm.setValues(currentArr.clone());
                 JPanel newPanel = secondSortingAlgorithm.getSortingDisplay();
                 newPanel.setPreferredSize(new Dimension(WIDTH, LENGTH));
@@ -112,12 +112,12 @@ public class CompareModePanel extends JPanel {
 
         int[] arr = helper.generateRandomIntArray(100);
 
-        firstSortingAlgorithm = helper.getSortSelected("Bubble Sort", arr);
+        firstSortingAlgorithm = helper.getSortSelected("Bubble Sort", arr, true);
         prevSelection1 = "Bubble Sort";
         sortingPanel1 = firstSortingAlgorithm.getSortingDisplay();
         sortingPanel1.setPreferredSize(new Dimension(WIDTH, LENGTH));
 
-        secondSortingAlgorithm = helper.getSortSelected("Bubble Sort", arr.clone());
+        secondSortingAlgorithm = helper.getSortSelected("Bubble Sort", arr.clone(), true);
         prevSelection2 = "Bubble Sort";
         sortingPanel2 = secondSortingAlgorithm.getSortingDisplay();
         sortingPanel2.setPreferredSize(new Dimension(WIDTH, LENGTH));
