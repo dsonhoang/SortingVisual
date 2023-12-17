@@ -29,8 +29,7 @@ public class SingleModePanel extends JPanel {
         // Create a box for the buttons
         Box hbox = Box.createHorizontalBox();
 
-        backButton = ElementCreater.createButton("Back", 12);
-        backButton.setPreferredSize(new Dimension(60, 30));
+        backButton = ElementCreater.createButton("Back", 12, 60, 30);
         backButton.addActionListener(e -> PanelManager.showPanel("ChoicePanel"));
         hbox.add(backButton);
 
@@ -80,8 +79,7 @@ public class SingleModePanel extends JPanel {
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
-        JButton changeSizeButton = ElementCreater.createButton("Change array size", 12);
-        changeSizeButton.setPreferredSize(new Dimension(150, 30));
+        JButton changeSizeButton = ElementCreater.createButton("Change array size", 12, 150, 30);
         changeSizeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Handle the change size button action
@@ -110,8 +108,7 @@ public class SingleModePanel extends JPanel {
         });
         bottomPanel.add(changeSizeButton);
 
-        JButton resetArrayButton = ElementCreater.createButton("Reset array", 12);
-        resetArrayButton.setPreferredSize(new Dimension(150, 30));
+        JButton resetArrayButton = ElementCreater.createButton("Reset array", 12, 150, 30);
         resetArrayButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (sortingAlgorithm.isRunning()) {
@@ -124,8 +121,7 @@ public class SingleModePanel extends JPanel {
         });
         bottomPanel.add(resetArrayButton);
 
-        JButton startButton = ElementCreater.createButton("Start", 12);
-        startButton.setPreferredSize(new Dimension(60, 30));
+        JButton startButton = ElementCreater.createButton("Start", 12, 60, 30);
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (sortingAlgorithm.isRunning() || helper.isSortedArray(sortingAlgorithm.getValues())) {

@@ -24,21 +24,24 @@ public class ChoicePanel extends JPanel {
         c.anchor = GridBagConstraints.NORTH;
         add(choiceLabel, c);
 
-        singleModeBtn = ElementCreater.createButton("Single Mode", 18);
+        singleModeBtn = ElementCreater.createButton("Single Mode", 18, 200, 400);
+        singleModeBtn.setPreferredSize(new Dimension(200, 40));
         c.gridy = 1;
         add(singleModeBtn, c);
         singleModeBtn.addActionListener(e ->
             PanelManager.showPanel("SingleModePanel")
         );
 
-        compareModeBtn = ElementCreater.createButton("Compare Mode", 18);
+        compareModeBtn = ElementCreater.createButton("Compare Mode", 18, 200, 400);
+        compareModeBtn.setPreferredSize(new Dimension(200, 40));
         c.gridy = 2;
         add(compareModeBtn, c);
         compareModeBtn.addActionListener(e ->
             PanelManager.showPanel("CompareModePanel")
         );
 
-        customCodeButton = ElementCreater.createButton("Your custom code", 18);
+        customCodeButton = ElementCreater.createButton("Your custom code", 18, 200, 400);
+        customCodeButton.setPreferredSize(new Dimension(200, 40));
         c.gridy = 3;
         add(customCodeButton, c);
         customCodeButton.addActionListener(e ->

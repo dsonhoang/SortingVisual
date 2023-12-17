@@ -25,8 +25,7 @@ public class CustomCodePanel extends JPanel {
         JScrollPane scroller = new JScrollPane(editableArea);
         scroller.setPreferredSize(new Dimension(300, 600));
 
-        saveButton = ElementCreater.createButton("Save", 12);
-        saveButton.setPreferredSize(new Dimension(60, 30));
+        saveButton = ElementCreater.createButton("Save", 12, 60, 30);
 
         saveButton.addActionListener(new ActionListener() {
             @Override
@@ -38,8 +37,7 @@ public class CustomCodePanel extends JPanel {
         });
 
 
-        backButton = ElementCreater.createButton("Back", 12);
-        backButton.setPreferredSize(new Dimension(60, 30));
+        backButton = ElementCreater.createButton("Back", 12, 60, 30);
         backButton.addActionListener(e -> PanelManager.showPanel("ChoicePanel"));
 
         JPanel footer = new JPanel();
