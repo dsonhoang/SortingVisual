@@ -5,6 +5,7 @@ import GUI.SortingDisplay;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Stack;
 
 public class TimSort extends SortingAbstract {
     private int[] values;
@@ -37,18 +38,46 @@ public class TimSort extends SortingAbstract {
     private void timSort(int[] arr, int n, long startTime) {
         int minRun = calculateMinRun(n);
 
-        for (int i = 0; i < n; i += minRun) {
-            insertionSort(arr, i, Math.min(i + minRun - 1, n - 1), startTime);
+        // Sử dụng ngăn xếp để lưu trữ các phần tử cần sắp xếp
+        Stack<Integer> stack = new Stack<>();
+        stack.push(0);
+        stack.push(n - 1);
+        int[] temp = new int[500];
+        int index = 0;
+        while (!stack.isEmpty()) {
+
+            int end = stack.pop();
+            int start = stack.pop();
+            int mid = (start + end) / 2;
+
+            if (end - start + 1 <= minRun) {
+                insertionSort(arr, start, end, startTime);
+                temp[index] = end;
+                index++;
+                continue;
+            }
+
+            stack.push(mid + 1);
+            stack.push(end);
+
+            stack.push(start);
+            stack.push(mid);
+            merge(arr, start, mid, end, startTime);
+
         }
 
-        int size = minRun;
-        while (size < n) {
-            for (int left = 0; left < n; left += 2 * size) {
-                int mid = left + size - 1;
-                int right = Math.min(left + 2 * size - 1, n - 1);
+        for(int j = 0; j <= Math.log(index) + 1; j++) {
+            int left = 0;
+            System.out.println(j);
+            for (int i = j * 2 + 1; i <= index; i += (j + 1) * 2) {
+                accessCount++;
+
+                int right = temp[i];
+                int mid = (right + left) / 2;
+                System.out.println(left + " " + mid + " " + right);
                 merge(arr, left, mid, right, startTime);
+                left = temp[i] + 1;
             }
-            size *= 2;
         }
     }
 

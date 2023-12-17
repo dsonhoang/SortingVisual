@@ -37,7 +37,6 @@ public class CycleSort extends SortingAbstract {
                 markedColumns.clear(); // Clear the previous swapped columns
                 markedColumns.add(i); // Add the first column being swapped
                 markedColumns.add(pos);
-                swapCount++;
                 timeExecuted = (System.nanoTime() - startTime) / 1e6;
                 sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
 
@@ -57,6 +56,7 @@ public class CycleSort extends SortingAbstract {
                 int temp = item;
                 item = values[pos];
                 values[pos] = temp;
+
                 swapCount++;
                 markedColumns.clear();
                 markedColumns.add(pos);
@@ -89,7 +89,10 @@ public class CycleSort extends SortingAbstract {
                     sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
                     notifyDisplay();
                 }
+
             }
+
+            comparisons += 2;
         }
 
         long endTime = System.nanoTime();
