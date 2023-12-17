@@ -30,6 +30,7 @@ public class Helper {
         list.add("Bubble Sort");
         list.add("Cocktail Shaker Sort");
         list.add("Comb Sort");
+        list.add("Custom Sort");
         list.add("Cycle Sort");
         list.add("Gnome Sort");
         list.add("Heap Sort");
@@ -46,46 +47,48 @@ public class Helper {
         return list;
     }
 
-    public SortingAlgorithm getSortSelected(String algorithmName, int[] values, boolean isVisual) {
+    public SortingAlgorithm getSortSelected(String algorithmName, int[] values) {
         switch (algorithmName) {
             case "Bubble Sort":
-                return new BubbleSort(values, isVisual);
+                return new BubbleSort(values);
             case "Insertion Sort":
-                return new InsertionSort(values, isVisual);
+                return new InsertionSort(values);
             case "Selection Sort":
-                return new SelectionSort(values, isVisual);
+                return new SelectionSort(values);
             case "Quick Sort":
-                return new QuickSort(values, isVisual);
+                return new QuickSort(values);
             case "Merge Sort":
-                return new MergeSort(values, isVisual);
+                return new MergeSort(values);
             case "Heap Sort":
-                return new HeapSort(values, isVisual);
+                return new HeapSort(values);
             case "Shell Sort":
-                return new ShellSort(values, isVisual);
+                return new ShellSort(values);
             case "Radix Sort":
-                return new RadixSort(values, isVisual);
+                return new RadixSort(values);
+            case "Custom Sort":
+                return new CustomSort(values);
             case "Binary Insertion Sort":
-                return new BinaryInsertionSort(values, isVisual);
+                return new BinaryInsertionSort(values);
             case "Bitonic Sort (Only works properly with arrays whose number of elements is a power of 2)":
-                return new BitonicSort(values, isVisual);
+                return new BitonicSort(values);
             case "Block Merge Sort":
-                return new BlockMergeSort(values, isVisual);
+                return new BlockMergeSort(values);
             case "Cocktail Shaker Sort":
-                return new CocktailShakerSort(values, isVisual);
+                return new CocktailShakerSort(values);
             case "Comb Sort":
-                return new CombSort(values, isVisual);
+                return new CombSort(values);
             case "Cycle Sort":
-                return new CycleSort(values, isVisual);
+                return new CycleSort(values);
             case "Gnome Sort":
-                return new GnomeSort(values, isVisual);
+                return new GnomeSort(values);
             case "Odd Even Sort":
-                return new OddEvenSort(values, isVisual);
+                return new OddEvenSort(values);
             case "Tim Sort":
-                return new TimSort(values, isVisual);
+                return new TimSort(values);
             case "Smooth Sort":
-                return new SmoothSort(values, isVisual);
+                return new SmoothSort(values);
             case "Standard Sort":
-                return new StandardSort(values, isVisual);
+                return new StandardSort(values);
             default:
                 return null;
         }
