@@ -42,7 +42,7 @@ public class TimSort extends SortingAbstract {
         Stack<Integer> stack = new Stack<>();
         stack.push(0);
         stack.push(n - 1);
-        int[] temp = new int[500];
+        int[] temp = new int[1000000];
         int index = 0;
         while (!stack.isEmpty()) {
 
@@ -62,21 +62,18 @@ public class TimSort extends SortingAbstract {
 
             stack.push(start);
             stack.push(mid);
-            merge(arr, start, mid, end, startTime);
 
         }
 
         for(int j = 0; j <= Math.log(index) + 1; j++) {
             int left = 0;
-            System.out.println(j);
             for (int i = j * 2 + 1; i <= index; i += (j + 1) * 2) {
-                accessCount++;
-
                 int right = temp[i];
                 int mid = (right + left) / 2;
-                System.out.println(left + " " + mid + " " + right);
                 merge(arr, left, mid, right, startTime);
                 left = temp[i] + 1;
+
+                accessCount++;
             }
         }
     }

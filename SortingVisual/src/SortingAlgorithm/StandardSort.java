@@ -29,17 +29,18 @@ public class StandardSort extends SortingAbstract {
             swapped = false;
             for (int i = 1; i < n; i++) {
                 accessCount++;
+                comparisons++;
                 if (values[i - 1] > values[i]) {
-                    comparisons++;
+
                     // Hoán đổi các phần tử nếu cần thiết
                     swap(values, i - 1, i);
+                    swapped = true;
+
                     markedColumns.clear();
                     markedColumns.add(i - 1);
                     markedColumns.add(i);
                     sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
                     notifyDisplay();
-
-                    swapped = true;
                 }
                 timeExecuted = (System.nanoTime() - startTime) / 1e6;
             }

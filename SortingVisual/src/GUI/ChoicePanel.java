@@ -8,7 +8,6 @@ import java.awt.*;
 public class ChoicePanel extends JPanel {
     private JButton singleModeBtn;
     private JButton compareModeBtn;
-    private JButton customCodeButton;
     private JButton chartButton;
 
     public ChoicePanel() {
