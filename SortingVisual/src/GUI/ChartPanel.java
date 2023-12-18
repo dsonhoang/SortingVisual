@@ -57,7 +57,14 @@ public class ChartPanel extends JPanel {
                 if (k == 0) {
                     g2d.drawString(Double.toString(0), x +8, y + 4);
                 } else {
-                    g2d.drawString(Double.toString(Math.round((1.0 * k * getMax(i) / 20 * 1000.0) / 1000.0)), x +8, y + 4);
+                    double result = (1.0 * getMax(i) / 20) * k;
+                    String formattedResult;
+                    if (i != numDimensions - 1) {
+                        formattedResult = Integer.toString((int)(result));
+                    } else {
+                        formattedResult = String.format("%.2f", result);
+                    }
+                    g2d.drawString(formattedResult, x +8, y + 4);
                 }
             }
             // Draw column name
