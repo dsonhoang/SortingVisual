@@ -45,8 +45,6 @@ public class OddEvenSort extends SortingAbstract {
                     notifyDisplay();
                     swapCount++;
                     sorted = false;
-                    comparisons++;
-                    accessCount++;
                 }
             }
 
@@ -58,9 +56,6 @@ public class OddEvenSort extends SortingAbstract {
                     int temp = values[i];
                     values[i] = values[i + 1];
                     values[i + 1] = temp;
-
-                    accessCount++;
-                    comparisons++;
 
                     markedColumns.clear();
                     markedColumns.add(i);
@@ -79,6 +74,9 @@ public class OddEvenSort extends SortingAbstract {
         timeExecuted = (endTime - startTime) / 1e6;
 
         isRunning = false;
+
+        sortingDisplay.setSorted(true);
+        notifyDisplay();
     }
 
     @Override
