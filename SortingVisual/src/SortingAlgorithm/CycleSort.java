@@ -41,7 +41,6 @@ public class CycleSort extends SortingAbstract {
                 sortingDisplay.setStatistics(accessCount, comparisons, swapCount, timeExecuted, markedColumns);
 
                 notifyDisplay();
-
             }
 
             if (pos == cycleStart) {
