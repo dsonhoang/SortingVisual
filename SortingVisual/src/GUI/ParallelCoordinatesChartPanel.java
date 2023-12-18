@@ -1,4 +1,4 @@
-package chart;
+package GUI;
 
 import GUI.ChartPanel;
 import GUI.PanelManager;
@@ -37,7 +37,7 @@ public class ParallelCoordinatesChartPanel extends JPanel {
         JPanel topCenterPanel = new JPanel();
         topCenterPanel.setLayout(new BorderLayout());
 
-        JPanel labelCenter = ElementCreater.createLabel("Test Mode");
+        JPanel labelCenter = ElementCreater.createLabel("Parallel Coordinates Chart");
         topCenterPanel.add(labelCenter, BorderLayout.NORTH);
 
         Box hbox = Box.createHorizontalBox();
@@ -65,9 +65,9 @@ public class ParallelCoordinatesChartPanel extends JPanel {
                     try {
                         int newArrayLength = Integer.parseInt(input);
 
-                        if (newArrayLength > 1000000 || newArrayLength <= 1) {
+                        if (newArrayLength > 1000 || newArrayLength <= 1) {
                             JOptionPane.showMessageDialog(null,
-                                    "Please enter an integer less or equal than 1000000 and greater than 1");
+                                    "Please enter an integer less or equal than 1000 and greater than 1");
                             return;
                         }
 
@@ -77,6 +77,7 @@ public class ParallelCoordinatesChartPanel extends JPanel {
                         for (String name : namesList) {
                             Thread thread = new Thread(() -> {
                                 SortingAlgorithm sortingAlgorithm = helper.getSortSelected(name, newArray.clone(), false);
+                                sortingAlgorithms.set(namesList.indexOf(name), sortingAlgorithm);
                                 sortingAlgorithm.sort();
                                 sampleData[namesList.indexOf(name)] = sortingAlgorithm.getStatistics();
                             });
@@ -103,7 +104,7 @@ public class ParallelCoordinatesChartPanel extends JPanel {
         });
         bottomPanel.add(changeSizeButton);
 
-        JButton resetArrayButton = ElementCreater.createButton("Reset array", 12, 150, 30);
+        JButton resetArrayButton = ElementCreater.createButton("Start / Reset array", 12, 150, 30);
         resetArrayButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int[] newArray = helper.generateRandomIntArray(sortingAlgorithms.get(0).getValues().length);
@@ -112,6 +113,7 @@ public class ParallelCoordinatesChartPanel extends JPanel {
                 for (String name : namesList) {
                     Thread thread = new Thread(() -> {
                         SortingAlgorithm sortingAlgorithm = helper.getSortSelected(name, newArray.clone(), false);
+                        sortingAlgorithms.set(namesList.indexOf(name), sortingAlgorithm);
                         sortingAlgorithm.sort();
                         sampleData[namesList.indexOf(name)] = sortingAlgorithm.getStatistics();
                     });
