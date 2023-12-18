@@ -25,7 +25,6 @@ public class Helper {
     public List<String> getListAlgorithm() {
         List<String> list = new ArrayList<String>();
         list.add("Binary Insertion Sort");
-        list.add("Bitonic Sort (Only works properly with arrays whose number of elements is a power of 2)");
         list.add("Block Merge Sort");
         list.add("Bubble Sort");
         list.add("Cocktail Shaker Sort");
@@ -66,8 +65,6 @@ public class Helper {
                 return new RadixSort(values, isVisual);
             case "Binary Insertion Sort":
                 return new BinaryInsertionSort(values, isVisual);
-            case "Bitonic Sort (Only works properly with arrays whose number of elements is a power of 2)":
-                return new BitonicSort(values, isVisual);
             case "Block Merge Sort":
                 return new BlockMergeSort(values, isVisual);
             case "Cocktail Shaker Sort":
