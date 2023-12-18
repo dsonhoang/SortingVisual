@@ -1,7 +1,5 @@
 package GUI;
 
-import chart.ParallelCoordinatesChartPanel;
-
 import javax.swing.*;
 import java.awt.*;
 
