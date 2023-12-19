@@ -1,11 +1,9 @@
 package SortingAlgorithm;
 
-import GUI.SortingDisplay;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuickSort extends SortingAbstract implements SortingAlgorithm {
+public class QuickSort extends SortingAbstract{
     private int[] values;
     private SortingDisplay sortingDisplay;
     private List<Integer> markedColumns;

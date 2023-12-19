@@ -1,7 +1,5 @@
 package SortingAlgorithm;
 
-import GUI.SortingDisplay;
-
 public interface SortingAlgorithm {
     void sort();
 

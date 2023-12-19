@@ -1,7 +1,5 @@
 package SortingAlgorithm;
 
-import GUI.SortingDisplay;
-
 import java.util.ArrayList;
 import java.util.List;
 

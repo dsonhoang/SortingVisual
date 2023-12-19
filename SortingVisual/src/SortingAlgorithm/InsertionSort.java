@@ -1,11 +1,9 @@
 package SortingAlgorithm;
 
-import GUI.SortingDisplay;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class InsertionSort extends SortingAbstract implements SortingAlgorithm {
+public class InsertionSort extends SortingAbstract{
 
     private int[] values;
     private SortingDisplay sortingDisplay;
